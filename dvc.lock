@@ -18,3 +18,33 @@ acquire_Cuomo_data:
   - path: results/Cuomo.zip
     md5: 95a272eab3cff21ffaf2cdd3654c7ee3
     size: 19881785
+extract_Yang_data:
+  cmd: mkdir -p results/Yang && singularity run toolbox/bin/utilities.sif unzip results/Yang.zip
+    -d results/Yang
+  deps:
+  - path: results/Yang.zip
+    md5: bc4f71bf4af472c85698213a7550b000
+    size: 5013715
+  - path: toolbox/bin/utilities.tag
+    md5: 145f21d43f221743576ec42be098a894
+    size: 82
+  outs:
+  - path: results/Yang
+    md5: 2352bb659be4d913ccb0ee90062fb560.dir
+    size: 21588641
+    nfiles: 11
+extract_Cuomo_data:
+  cmd: mkdir -p results/Cuomo && singularity run toolbox/bin/utilities.sif unzip results/Cuomo.zip
+    -d results/Cuomo
+  deps:
+  - path: results/Cuomo.zip
+    md5: 95a272eab3cff21ffaf2cdd3654c7ee3
+    size: 19881785
+  - path: toolbox/bin/utilities.tag
+    md5: 145f21d43f221743576ec42be098a894
+    size: 82
+  outs:
+  - path: results/Cuomo
+    md5: a8916107b8cd24e50829725e016f03b1.dir
+    size: 103639294
+    nfiles: 3

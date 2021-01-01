@@ -11,3 +11,19 @@ stages:
     - inputs/SC_Cuomo-20201211T162156Z-001.zip
     outs:
     - results/Cuomo.zip
+  extract_Yang_data:
+    cmd: mkdir -p results/Yang && singularity run toolbox/bin/utilities.sif unzip
+      results/Yang.zip -d results/Yang
+    deps:
+    - results/Yang.zip
+    - toolbox/bin/utilities.tag
+    outs:
+    - results/Yang
+  extract_Cuomo_data:
+    cmd: mkdir -p results/Cuomo && singularity run toolbox/bin/utilities.sif unzip
+      results/Cuomo.zip -d results/Cuomo
+    deps:
+    - results/Cuomo.zip
+    - toolbox/bin/utilities.tag
+    outs:
+    - results/Cuomo
