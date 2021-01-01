@@ -1,0 +1,20 @@
+acquire_Yang_data:
+  cmd: cp inputs/bulk_Yang-20201211T162105Z-001.zip results/Yang.zip
+  deps:
+  - path: inputs/bulk_Yang-20201211T162105Z-001.zip
+    md5: bc4f71bf4af472c85698213a7550b000
+    size: 5013715
+  outs:
+  - path: results/Yang.zip
+    md5: bc4f71bf4af472c85698213a7550b000
+    size: 5013715
+acquire_Cuomo_data:
+  cmd: cp inputs/SC_Cuomo-20201211T162156Z-001.zip results/Cuomo.zip
+  deps:
+  - path: inputs/SC_Cuomo-20201211T162156Z-001.zip
+    md5: 95a272eab3cff21ffaf2cdd3654c7ee3
+    size: 19881785
+  outs:
+  - path: results/Cuomo.zip
+    md5: 95a272eab3cff21ffaf2cdd3654c7ee3
+    size: 19881785

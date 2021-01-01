@@ -1,0 +1,13 @@
+stages:
+  acquire_Yang_data:
+    cmd: cp inputs/bulk_Yang-20201211T162105Z-001.zip results/Yang.zip
+    deps:
+    - inputs/bulk_Yang-20201211T162105Z-001.zip
+    outs:
+    - results/Yang.zip
+  acquire_Cuomo_data:
+    cmd: cp inputs/SC_Cuomo-20201211T162156Z-001.zip results/Cuomo.zip
+    deps:
+    - inputs/SC_Cuomo-20201211T162156Z-001.zip
+    outs:
+    - results/Cuomo.zip
