@@ -1,50 +1,50 @@
-acquire_Yang_data:
-  cmd: cp inputs/bulk_Yang-20201211T162105Z-001.zip results/Yang.zip
-  deps:
-  - path: inputs/bulk_Yang-20201211T162105Z-001.zip
-    md5: bc4f71bf4af472c85698213a7550b000
-    size: 5013715
-  outs:
-  - path: results/Yang.zip
-    md5: bc4f71bf4af472c85698213a7550b000
-    size: 5013715
 acquire_Cuomo_data:
-  cmd: cp inputs/SC_Cuomo-20201211T162156Z-001.zip results/Cuomo.zip
+  cmd: mkdir -p results/Cuomo/raw && cp inputs/SC_Cuomo-20210102T132349Z-001.zip results/Cuomo/raw/Cuomo.zip
   deps:
   - path: inputs/SC_Cuomo-20201211T162156Z-001.zip
     md5: 95a272eab3cff21ffaf2cdd3654c7ee3
     size: 19881785
   outs:
-  - path: results/Cuomo.zip
-    md5: 95a272eab3cff21ffaf2cdd3654c7ee3
-    size: 19881785
-extract_Yang_data:
-  cmd: mkdir -p results/Yang && singularity run toolbox/bin/utilities.sif unzip results/Yang.zip
-    -d results/Yang
+  - path: results/Cuomo/raw/Cuomo.zip
+    md5: 74d363e079028ff436bf627f500d280e
+    size: 46910902
+extract_Cuomo_data:
+  cmd: singularity run toolbox/bin/utilities.sif unzip results/Cuomo/raw/Cuomo.zip
+    -d results/Cuomo/raw
   deps:
-  - path: results/Yang.zip
+  - path: results/Cuomo/raw/Cuomo.zip
+    md5: 74d363e079028ff436bf627f500d280e
+    size: 46910902
+  - path: toolbox/bin/utilities.tag
+    md5: 145f21d43f221743576ec42be098a894
+    size: 82
+  outs:
+  - path: results/Cuomo/raw/SC_Cuomo
+    md5: f0143ff3cb97ab3c5c3b9530b3ea3931.dir
+    size: 446579167
+    nfiles: 11
+acquire_Yang_data:
+  cmd: mkdir -p results/Yang/raw && cp inputs/bulk_Yang-20210102T132322Z-001.zip results/Yang/raw/Yang.zip
+  deps:
+  - path: inputs/bulk_Yang-20201211T162105Z-001.zip
     md5: bc4f71bf4af472c85698213a7550b000
+    size: 5013715
+  outs:
+  - path: results/Yang/raw/Yang.zip
+    md5: eb6b0d38d27b67d0b91f07621e339860
+    size: 5013715
+extract_Yang_data:
+  cmd: singularity run toolbox/bin/utilities.sif unzip results/Yang/raw/Yang.zip -d
+    results/Yang/raw
+  deps:
+  - path: results/Yang/raw/Yang.zip
+    md5: eb6b0d38d27b67d0b91f07621e339860
     size: 5013715
   - path: toolbox/bin/utilities.tag
     md5: 145f21d43f221743576ec42be098a894
     size: 82
   outs:
-  - path: results/Yang
-    md5: 2352bb659be4d913ccb0ee90062fb560.dir
+  - path: results/Yang/raw/bulk_Yang
+    md5: 717f50b83204bd005e95a81af740ab8d.dir
     size: 21588641
     nfiles: 11
-extract_Cuomo_data:
-  cmd: mkdir -p results/Cuomo && singularity run toolbox/bin/utilities.sif unzip results/Cuomo.zip
-    -d results/Cuomo
-  deps:
-  - path: results/Cuomo.zip
-    md5: 95a272eab3cff21ffaf2cdd3654c7ee3
-    size: 19881785
-  - path: toolbox/bin/utilities.tag
-    md5: 145f21d43f221743576ec42be098a894
-    size: 82
-  outs:
-  - path: results/Cuomo
-    md5: a8916107b8cd24e50829725e016f03b1.dir
-    size: 103639294
-    nfiles: 3
