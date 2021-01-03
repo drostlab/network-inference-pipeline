@@ -1,4 +1,32 @@
 stages:
+  inspect_utilities:
+    cmd: mkdir -p results/tooling && singularity run --app specification toolbox/bin/utilities.sif
+      >results/tooling/utilities.specification
+    deps:
+    - toolbox/bin/utilities.sif
+    outs:
+    - results/tooling/utilities.specification
+  inspect_arboreto:
+    cmd: mkdir -p results/tooling && singularity run --app specification toolbox/bin/arboreto.sif
+      >results/tooling/arboreto.specification
+    deps:
+    - toolbox/bin/arboreto.sif
+    outs:
+    - results/tooling/arboreto.specification
+  inspect_PIDC:
+    cmd: mkdir -p results/tooling && singularity run --app specification toolbox/bin/PIDC.sif
+      >results/tooling/PIDC.specification
+    deps:
+    - toolbox/bin/PIDC.sif
+    outs:
+    - results/tooling/PIDC.specification
+  inspect_Rmultitool:
+    cmd: mkdir -p results/tooling && singularity run --app specification toolbox/bin/R-multitool.sif
+      >results/tooling/R-multitool.specification
+    deps:
+    - toolbox/bin/R-multitool.sif
+    outs:
+    - results/tooling/R-multitool.specification
   acquire_Yang_data:
     cmd: mkdir -p results/Yang/raw && cp inputs/bulk_Yang-20210102T132322Z-001.zip
       results/Yang/raw/Yang.zip
@@ -18,7 +46,7 @@ stages:
       -d results/Yang/raw
     deps:
     - results/Yang/raw/Yang.zip
-    - toolbox/bin/utilities.tag
+    - results/tooling/utilities.specification
     outs:
     - results/Yang/raw/bulk_Yang
   extract_Cuomo_data:
@@ -26,7 +54,7 @@ stages:
       -d results/Cuomo/raw
     deps:
     - results/Cuomo/raw/Cuomo.zip
-    - toolbox/bin/utilities.tag
+    - results/tooling/utilities.specification
     outs:
     - results/Cuomo/raw/SC_Cuomo
   clean_Yang_data:
@@ -34,8 +62,8 @@ stages:
       results/Yang/clean
     deps:
     - results/Yang/raw/bulk_Yang
+    - results/tooling/utilities.specification
     - src/clean_Yang.sh
-    - toolbox/bin/utilities.tag
     outs:
     - results/Yang/clean
   clean_Cuomo_data:
@@ -43,8 +71,8 @@ stages:
       results/Cuomo/clean
     deps:
     - results/Cuomo/raw/SC_Cuomo
+    - results/tooling/utilities.specification
     - src/clean_Cuomo.sh
-    - toolbox/bin/utilities.tag
     outs:
     - results/Cuomo/clean
   slice_Yang_data:
@@ -52,8 +80,8 @@ stages:
       results/Yang/sliced
     deps:
     - results/Yang/clean
+    - results/tooling/utilities.specification
     - src/slice.sh
-    - toolbox/bin/utilities.tag
     outs:
     - results/Yang/sliced
   slice_Cuomo_data:
@@ -61,8 +89,8 @@ stages:
       results/Cuomo/sliced
     deps:
     - results/Cuomo/clean
+    - results/tooling/utilities.specification
     - src/slice.sh
-    - toolbox/bin/utilities.tag
     outs:
     - results/Cuomo/sliced
   infer_Yang_NetworkInferenceJl_CLR:
@@ -70,8 +98,8 @@ stages:
       CLR results/Yang/sliced results/Yang/networks/NetworkInference.jl/CLR
     deps:
     - results/Yang/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Yang/networks/NetworkInference.jl/CLR
   infer_Cuomo_NetworkInferenceJl_CLR:
@@ -79,8 +107,8 @@ stages:
       CLR results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/CLR
     deps:
     - results/Cuomo/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Cuomo/networks/NetworkInference.jl/CLR
   infer_Yang_NetworkInferenceJl_MI:
@@ -88,8 +116,8 @@ stages:
       MI results/Yang/sliced results/Yang/networks/NetworkInference.jl/MI
     deps:
     - results/Yang/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Yang/networks/NetworkInference.jl/MI
   infer_Cuomo_NetworkInferenceJl_MI:
@@ -97,8 +125,8 @@ stages:
       MI results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/MI
     deps:
     - results/Cuomo/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Cuomo/networks/NetworkInference.jl/MI
   infer_Yang_NetworkInferenceJl_PIDC:
@@ -106,8 +134,8 @@ stages:
       PIDC results/Yang/sliced results/Yang/networks/NetworkInference.jl/PIDC
     deps:
     - results/Yang/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Yang/networks/NetworkInference.jl/PIDC
   infer_Cuomo_NetworkInferenceJl_PIDC:
@@ -115,8 +143,8 @@ stages:
       PIDC results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/PIDC
     deps:
     - results/Cuomo/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Cuomo/networks/NetworkInference.jl/PIDC
   infer_Yang_NetworkInferenceJl_PUC:
@@ -124,8 +152,8 @@ stages:
       PUC results/Yang/sliced results/Yang/networks/NetworkInference.jl/PUC
     deps:
     - results/Yang/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Yang/networks/NetworkInference.jl/PUC
   infer_Cuomo_NetworkInferenceJl_PUC:
@@ -133,7 +161,7 @@ stages:
       PUC results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/PUC
     deps:
     - results/Cuomo/sliced
+    - results/tooling/PIDC.specification
     - src/NetworkInference.jl
-    - toolbox/bin/PIDC.tag
     outs:
     - results/Cuomo/networks/NetworkInference.jl/PUC
