@@ -48,3 +48,78 @@ extract_Yang_data:
     md5: 717f50b83204bd005e95a81af740ab8d.dir
     size: 21588641
     nfiles: 11
+clean_Yang_data:
+  cmd: singularity run toolbox/bin/utilities.sif src/clean_Yang.sh results/Yang/raw/bulk_Yang
+    results/Yang/clean
+  deps:
+  - path: results/Yang/raw/bulk_Yang
+    md5: 717f50b83204bd005e95a81af740ab8d.dir
+    size: 21588641
+    nfiles: 11
+  - path: src/clean_Yang.sh
+    md5: d55ec43240081dfa6bbbca42b5ec0903
+    size: 403
+  - path: toolbox/bin/utilities.tag
+    md5: 145f21d43f221743576ec42be098a894
+    size: 82
+  outs:
+  - path: results/Yang/clean
+    md5: f23b9caf389273d45067077efac43aa6.dir
+    size: 19900176
+    nfiles: 9
+clean_Cuomo_data:
+  cmd: singularity run toolbox/bin/utilities.sif src/clean_Cuomo.sh results/Cuomo/raw/SC_Cuomo
+    results/Cuomo/clean
+  deps:
+  - path: results/Cuomo/raw/SC_Cuomo
+    md5: f0143ff3cb97ab3c5c3b9530b3ea3931.dir
+    size: 446579167
+    nfiles: 11
+  - path: src/clean_Cuomo.sh
+    md5: d55ec43240081dfa6bbbca42b5ec0903
+    size: 403
+  - path: toolbox/bin/utilities.tag
+    md5: 145f21d43f221743576ec42be098a894
+    size: 82
+  outs:
+  - path: results/Cuomo/clean
+    md5: 6e96330dfec8e11476015e29313fefc6.dir
+    size: 413958291
+    nfiles: 7
+slice_Yang_data:
+  cmd: singularity run toolbox/bin/utilities.sif src/slice.sh results/Yang/clean results/Yang/sliced
+  deps:
+  - path: results/Yang/clean
+    md5: f23b9caf389273d45067077efac43aa6.dir
+    size: 19900176
+    nfiles: 9
+  - path: src/slice.sh
+    md5: b8c2aebb69164ab9c85b755ae42ba22e
+    size: 409
+  - path: toolbox/bin/utilities.tag
+    md5: 145f21d43f221743576ec42be098a894
+    size: 82
+  outs:
+  - path: results/Yang/sliced
+    md5: adf110ad2c8a3552848e39dcc19346c9.dir
+    size: 1460710
+    nfiles: 20
+slice_Cuomo_data:
+  cmd: singularity run toolbox/bin/utilities.sif src/slice.sh results/Cuomo/clean
+    results/Cuomo/sliced
+  deps:
+  - path: results/Cuomo/clean
+    md5: 6e96330dfec8e11476015e29313fefc6.dir
+    size: 413958291
+    nfiles: 7
+  - path: src/slice.sh
+    md5: b8c2aebb69164ab9c85b755ae42ba22e
+    size: 409
+  - path: toolbox/bin/utilities.tag
+    md5: 145f21d43f221743576ec42be098a894
+    size: 82
+  outs:
+  - path: results/Cuomo/sliced
+    md5: 3bdc8ba034659c77a0e17891566abf53.dir
+    size: 10114995
+    nfiles: 12
