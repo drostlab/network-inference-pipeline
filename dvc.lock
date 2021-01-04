@@ -327,3 +327,95 @@ inspect_arboreto:
   - path: results/tooling/arboreto.specification
     md5: 2bf56055366a085581eed1247b4b0742
     size: 162
+infer_Yang_GENIE3R:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+    results/Yang/sliced results/Yang/networks/GENIE3-R Rscript src/GENIE3-R/infer_network.R
+  deps:
+  - path: results/Yang/sliced
+    md5: adf110ad2c8a3552848e39dcc19346c9.dir
+    size: 1460710
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: 81feacb3165f9a79c957e14852125340
+    size: 503
+  - path: src/GENIE3-R
+    md5: 6b71bde0ba856bca7716a5ffe2c23755.dir
+    size: 315
+    nfiles: 1
+  - path: src/infer_foreach_slice.sh
+    md5: c9b0b665cf86ac42be14fd7a10dd248e
+    size: 316
+  outs:
+  - path: results/Yang/networks/GENIE3-R
+    md5: 9d90617d253d2f798244146dbf3094d4.dir
+    size: 99828892
+    nfiles: 60
+infer_Cuomo_LEAP:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+    results/Cuomo/sliced results/Cuomo/networks/LEAP Rscript src/LEAP/infer_network.R
+  deps:
+  - path: results/Cuomo/sliced
+    md5: 3bdc8ba034659c77a0e17891566abf53.dir
+    size: 10114995
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: 81feacb3165f9a79c957e14852125340
+    size: 503
+  - path: src/LEAP
+    md5: c3830e3548621f0b8ede853378ed9011.dir
+    size: 307
+    nfiles: 1
+  - path: src/infer_foreach_slice.sh
+    md5: c9b0b665cf86ac42be14fd7a10dd248e
+    size: 316
+  outs:
+  - path: results/Cuomo/networks/LEAP
+    md5: b3451d0baefcce98dbb731235129f772.dir
+    size: 13379985
+    nfiles: 36
+infer_Cuomo_GENIE3R:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+    results/Cuomo/sliced results/Cuomo/networks/GENIE3-R Rscript src/GENIE3-R/infer_network.R
+  deps:
+  - path: results/Cuomo/sliced
+    md5: 3bdc8ba034659c77a0e17891566abf53.dir
+    size: 10114995
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: 81feacb3165f9a79c957e14852125340
+    size: 503
+  - path: src/GENIE3-R
+    md5: 6b71bde0ba856bca7716a5ffe2c23755.dir
+    size: 315
+    nfiles: 1
+  - path: src/infer_foreach_slice.sh
+    md5: c9b0b665cf86ac42be14fd7a10dd248e
+    size: 316
+  outs:
+  - path: results/Cuomo/networks/GENIE3-R
+    md5: 968da3fa47382df29fb02931a1c2d7bc.dir
+    size: 6410188
+    nfiles: 36
+infer_Yang_LEAP:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+    results/Yang/sliced results/Yang/networks/LEAP Rscript src/LEAP/infer_network.R
+  deps:
+  - path: results/Yang/sliced
+    md5: adf110ad2c8a3552848e39dcc19346c9.dir
+    size: 1460710
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: 81feacb3165f9a79c957e14852125340
+    size: 503
+  - path: src/LEAP
+    md5: c3830e3548621f0b8ede853378ed9011.dir
+    size: 307
+    nfiles: 1
+  - path: src/infer_foreach_slice.sh
+    md5: c9b0b665cf86ac42be14fd7a10dd248e
+    size: 316
+  outs:
+  - path: results/Yang/networks/LEAP
+    md5: dd95661ec5e5a40a4eeec874924a9dbc.dir
+    size: 237314552
+    nfiles: 60

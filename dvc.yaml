@@ -165,3 +165,43 @@ stages:
     - src/NetworkInference.jl
     outs:
     - results/Cuomo/networks/NetworkInference.jl/PUC
+  infer_Yang_GENIE3R:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+      results/Yang/sliced results/Yang/networks/GENIE3-R Rscript src/GENIE3-R/infer_network.R
+    deps:
+    - results/Yang/sliced
+    - results/tooling/R-multitool.specification
+    - src/GENIE3-R
+    - src/infer_foreach_slice.sh
+    outs:
+    - results/Yang/networks/GENIE3-R
+  infer_Cuomo_GENIE3R:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+      results/Cuomo/sliced results/Cuomo/networks/GENIE3-R Rscript src/GENIE3-R/infer_network.R
+    deps:
+    - results/Cuomo/sliced
+    - results/tooling/R-multitool.specification
+    - src/GENIE3-R
+    - src/infer_foreach_slice.sh
+    outs:
+    - results/Cuomo/networks/GENIE3-R
+  infer_Yang_LEAP:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+      results/Yang/sliced results/Yang/networks/LEAP Rscript src/LEAP/infer_network.R
+    deps:
+    - results/Yang/sliced
+    - results/tooling/R-multitool.specification
+    - src/LEAP
+    - src/infer_foreach_slice.sh
+    outs:
+    - results/Yang/networks/LEAP
+  infer_Cuomo_LEAP:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
+      results/Cuomo/sliced results/Cuomo/networks/LEAP Rscript src/LEAP/infer_network.R
+    deps:
+    - results/Cuomo/sliced
+    - results/tooling/R-multitool.specification
+    - src/LEAP
+    - src/infer_foreach_slice.sh
+    outs:
+    - results/Cuomo/networks/LEAP
