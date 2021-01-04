@@ -94,114 +94,146 @@ stages:
     outs:
     - results/Cuomo/sliced
   infer_Yang_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      CLR results/Yang/sliced results/Yang/networks/NetworkInference.jl/CLR
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Yang/sliced
+      results/Yang/networks/NetworkInference.jl/CLR
+      julia src/NetworkInference.jl/infer_network.jl CLR
     deps:
     - results/Yang/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Yang/networks/NetworkInference.jl/CLR
   infer_Cuomo_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      CLR results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/CLR
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Cuomo/sliced
+      results/Cuomo/networks/NetworkInference.jl/CLR
+      julia src/NetworkInference.jl/infer_network.jl CLR
     deps:
     - results/Cuomo/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Cuomo/networks/NetworkInference.jl/CLR
   infer_Yang_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      MI results/Yang/sliced results/Yang/networks/NetworkInference.jl/MI
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Yang/sliced
+      results/Yang/networks/NetworkInference.jl/MI
+      julia src/NetworkInference.jl/infer_network.jl MI
     deps:
     - results/Yang/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Yang/networks/NetworkInference.jl/MI
   infer_Cuomo_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      MI results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/MI
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Cuomo/sliced
+      results/Cuomo/networks/NetworkInference.jl/MI
+      julia src/NetworkInference.jl/infer_network.jl MI
     deps:
     - results/Cuomo/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Cuomo/networks/NetworkInference.jl/MI
   infer_Yang_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      PIDC results/Yang/sliced results/Yang/networks/NetworkInference.jl/PIDC
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Yang/sliced
+      results/Yang/networks/NetworkInference.jl/PIDC
+      julia src/NetworkInference.jl/infer_network.jl PIDC
     deps:
     - results/Yang/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Yang/networks/NetworkInference.jl/PIDC
   infer_Cuomo_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      PIDC results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/PIDC
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Cuomo/sliced
+      results/Cuomo/networks/NetworkInference.jl/PIDC
+      julia src/NetworkInference.jl/infer_network.jl PIDC
     deps:
     - results/Cuomo/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Cuomo/networks/NetworkInference.jl/PIDC
   infer_Yang_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      PUC results/Yang/sliced results/Yang/networks/NetworkInference.jl/PUC
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Yang/sliced
+      results/Yang/networks/NetworkInference.jl/PUC
+      julia src/NetworkInference.jl/infer_network.jl PUC
     deps:
     - results/Yang/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Yang/networks/NetworkInference.jl/PUC
   infer_Cuomo_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/PIDC.sif sh src/NetworkInference.jl/infer_networks.sh
-      PUC results/Cuomo/sliced results/Cuomo/networks/NetworkInference.jl/PUC
+    cmd: singularity exec toolbox/bin/PIDC.sif sh src/infer_foreach_slice.sh
+      results/Cuomo/sliced
+      results/Cuomo/networks/NetworkInference.jl/PUC
+      julia src/NetworkInference.jl/infer_network.jl PUC
     deps:
     - results/Cuomo/sliced
     - results/tooling/PIDC.specification
+    - src/infer_foreach_slice.sh
     - src/NetworkInference.jl
     outs:
     - results/Cuomo/networks/NetworkInference.jl/PUC
   infer_Yang_GENIE3R:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
-      results/Yang/sliced results/Yang/networks/GENIE3-R Rscript src/GENIE3-R/infer_network.R
+      results/Yang/sliced
+      results/Yang/networks/GENIE3-R
+      Rscript src/GENIE3-R/infer_network.R
     deps:
     - results/Yang/sliced
     - results/tooling/R-multitool.specification
-    - src/GENIE3-R
     - src/infer_foreach_slice.sh
+    - src/GENIE3-R
     outs:
     - results/Yang/networks/GENIE3-R
   infer_Cuomo_GENIE3R:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
-      results/Cuomo/sliced results/Cuomo/networks/GENIE3-R Rscript src/GENIE3-R/infer_network.R
+      results/Cuomo/sliced
+      results/Cuomo/networks/GENIE3-R
+      Rscript src/GENIE3-R/infer_network.R
     deps:
     - results/Cuomo/sliced
     - results/tooling/R-multitool.specification
-    - src/GENIE3-R
     - src/infer_foreach_slice.sh
+    - src/GENIE3-R
     outs:
     - results/Cuomo/networks/GENIE3-R
   infer_Yang_LEAP:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
-      results/Yang/sliced results/Yang/networks/LEAP Rscript src/LEAP/infer_network.R
+      results/Yang/sliced
+      results/Yang/networks/LEAP
+      Rscript src/LEAP/infer_network.R
     deps:
     - results/Yang/sliced
     - results/tooling/R-multitool.specification
-    - src/LEAP
     - src/infer_foreach_slice.sh
+    - src/LEAP
     outs:
     - results/Yang/networks/LEAP
   infer_Cuomo_LEAP:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
-      results/Cuomo/sliced results/Cuomo/networks/LEAP Rscript src/LEAP/infer_network.R
+      results/Cuomo/sliced
+      results/Cuomo/networks/LEAP
+      Rscript src/LEAP/infer_network.R
     deps:
     - results/Cuomo/sliced
     - results/tooling/R-multitool.specification
-    - src/LEAP
     - src/infer_foreach_slice.sh
+    - src/LEAP
     outs:
     - results/Cuomo/networks/LEAP
