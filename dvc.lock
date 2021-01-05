@@ -101,11 +101,11 @@ inspect_Rmultitool:
     >results/tooling/R-multitool.specification
   deps:
   - path: toolbox/bin/R-multitool.sif
-    md5: 6614bf508b02f75260981f30ad8004a8
-    size: 437395456
+    md5: 6268f92cc3602aa18823fac9f61a2aeb
+    size: 610344960
   outs:
   - path: results/tooling/R-multitool.specification
-    md5: 81feacb3165f9a79c957e14852125340
+    md5: 7e195f103eefc670c45f7e526b4efd06
     size: 503
 infer_Yang_LEAP:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
@@ -116,7 +116,7 @@ infer_Yang_LEAP:
     size: 1460710
     nfiles: 20
   - path: results/tooling/R-multitool.specification
-    md5: 81feacb3165f9a79c957e14852125340
+    md5: 7e195f103eefc670c45f7e526b4efd06
     size: 503
   - path: src/LEAP
     md5: c3830e3548621f0b8ede853378ed9011.dir
@@ -127,8 +127,8 @@ infer_Yang_LEAP:
     size: 968
   outs:
   - path: results/Yang/networks/LEAP
-    md5: 3738887b8fb1f99f2ff361045d60163a.dir
-    size: 237314570
+    md5: 5e676ed2c6ef3dd7de636f7d5c09cdeb.dir
+    size: 237314561
     nfiles: 60
 clean_Cuomo_data:
   cmd: singularity run toolbox/bin/utilities.sif src/clean_Cuomo.sh results/Cuomo/raw/SC_Cuomo
@@ -308,7 +308,7 @@ infer_Cuomo_LEAP:
     size: 10114995
     nfiles: 12
   - path: results/tooling/R-multitool.specification
-    md5: 81feacb3165f9a79c957e14852125340
+    md5: 7e195f103eefc670c45f7e526b4efd06
     size: 503
   - path: src/LEAP
     md5: c3830e3548621f0b8ede853378ed9011.dir
@@ -319,8 +319,8 @@ infer_Cuomo_LEAP:
     size: 968
   outs:
   - path: results/Cuomo/networks/LEAP
-    md5: a48a96f1e3df48cdec73f7d699dc2216.dir
-    size: 13379985
+    md5: 8f798ec3c2c06ba0f9fc9dc1e6085461.dir
+    size: 13379993
     nfiles: 36
 inspect_arboreto:
   cmd: mkdir -p results/tooling && singularity run --app specification toolbox/bin/arboreto.sif
@@ -342,7 +342,7 @@ infer_Cuomo_GENIE3R:
     size: 10114995
     nfiles: 12
   - path: results/tooling/R-multitool.specification
-    md5: 81feacb3165f9a79c957e14852125340
+    md5: 7e195f103eefc670c45f7e526b4efd06
     size: 503
   - path: src/GENIE3-R
     md5: 6b71bde0ba856bca7716a5ffe2c23755.dir
@@ -353,8 +353,8 @@ infer_Cuomo_GENIE3R:
     size: 968
   outs:
   - path: results/Cuomo/networks/GENIE3-R
-    md5: 2b895b4c095c01fc38841cc62e46f890.dir
-    size: 6409845
+    md5: 583f3d3b00a67dfb688e19d9b0ca7f10.dir
+    size: 6410385
     nfiles: 36
 infer_Yang_NetworkInferenceJl_MI:
   cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/infer_foreach_slice.sh
@@ -437,7 +437,7 @@ infer_Yang_GENIE3R:
     size: 1460710
     nfiles: 20
   - path: results/tooling/R-multitool.specification
-    md5: 81feacb3165f9a79c957e14852125340
+    md5: 7e195f103eefc670c45f7e526b4efd06
     size: 503
   - path: src/GENIE3-R
     md5: 6b71bde0ba856bca7716a5ffe2c23755.dir
@@ -448,6 +448,6 @@ infer_Yang_GENIE3R:
     size: 968
   outs:
   - path: results/Yang/networks/GENIE3-R
-    md5: c8a27d5d9ceab76c28ebb7ab460256fc.dir
-    size: 99833450
+    md5: f40671d51ccde01f4aa4d26c40fab0c5.dir
+    size: 99832813
     nfiles: 60
