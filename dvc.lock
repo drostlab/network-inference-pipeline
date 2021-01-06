@@ -95,16 +95,16 @@ infer_Yang_LEAP:
     md5: dff1b1f75cc5e1f410d64553fc091ffb
     size: 503
   - path: src/LEAP
-    md5: 08848b6ce98091f73fd0e5dee09be43d.dir
-    size: 241
+    md5: 708b4f57275adfbe4a1202fcf7d76dec.dir
+    size: 658
     nfiles: 1
   - path: src/infer_foreach_slice.sh
     md5: 9c90471c6b1ecabf4bc2b9c0a6be0f95
     size: 1094
   outs:
   - path: results/Yang/networks/LEAP
-    md5: 4394e2c5e5a5b65c26d87304dda0b6bf.dir
-    size: 238024070
+    md5: d95d50af8851260155a912e995e6e1b1.dir
+    size: 292984927
     nfiles: 20
 acquire_Cuomo_data:
   cmd: mkdir -p results/Cuomo/raw && cp inputs/SC_Cuomo-20210102T132349Z-001.zip results/Cuomo/raw/Cuomo.zip
@@ -182,16 +182,16 @@ infer_Cuomo_LEAP:
     md5: dff1b1f75cc5e1f410d64553fc091ffb
     size: 503
   - path: src/LEAP
-    md5: 08848b6ce98091f73fd0e5dee09be43d.dir
-    size: 241
+    md5: 708b4f57275adfbe4a1202fcf7d76dec.dir
+    size: 658
     nfiles: 1
   - path: src/infer_foreach_slice.sh
     md5: 9c90471c6b1ecabf4bc2b9c0a6be0f95
     size: 1094
   outs:
   - path: results/Cuomo/networks/LEAP
-    md5: d105a43aede9b053bdafd943e6e3d5c2.dir
-    size: 13528332
+    md5: 4425c7d412b4cc71c837b0aad1340272.dir
+    size: 16160805
     nfiles: 12
 infer_Yang_GENIE3R:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
