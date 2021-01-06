@@ -249,3 +249,29 @@ stages:
     - src/LEAP
     outs:
     - results/Cuomo/networks/LEAP
+  infer_Yang_GRNBoost2:
+    cmd: singularity exec toolbox/bin/arboreto.sif sh src/infer_foreach_slice.sh
+      results/Yang/sliced
+      results/Yang/networks/GRNBoost2
+      logs/Yang/networks/GRNBoost2
+      python src/GRNBoost2/infer_network.py
+    deps:
+    - results/Yang/sliced
+    - results/tooling/arboreto.specification
+    - src/infer_foreach_slice.sh
+    - src/GRNBoost2
+    outs:
+    - results/Yang/networks/GRNBoost2
+  infer_Cuomo_GRNBoost2:
+    cmd: singularity exec toolbox/bin/arboreto.sif sh src/infer_foreach_slice.sh
+      results/Cuomo/sliced
+      results/Cuomo/networks/GRNBoost2
+      logs/Cuomo/networks/GRNBoost2
+      python src/GRNBoost2/infer_network.py
+    deps:
+    - results/Cuomo/sliced
+    - results/tooling/arboreto.specification
+    - src/infer_foreach_slice.sh
+    - src/GRNBoost2
+    outs:
+    - results/Cuomo/networks/GRNBoost2
