@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # Usage:
-#  infer_foreach_slice.sh <source> <sink> <logs> <command ...>
+#  plot_foreach_network.sh <source> <sink> <logs> <command ...>
 #
-# This script will iterate all files named `counts_*.csv` in the <source>
+# This script will iterate all files named `network_*.csv` in the <source>
 # directory and call back <command> for each one. All arguments to this script
 # trailing the first three (<source>, <sink> and <logs>) will be considered
 # part of <command>.
@@ -28,13 +28,13 @@ cd "$SOURCE"
 mkdir -p "$BASE/$SINK"
 mkdir -p "$BASE/$LOGS"
 
-for f in counts_*.csv; do (
+for f in network_*.csv; do (
   cd $BASE
-  output_name="network_$(echo $f | sed 's/^counts_\(.*\).csv/\1/')"
+  output_name="$(echo $f | sed 's/^network_\(.*\).csv/\1/')"
   set -x
   time $@ \
     "$SOURCE/$f" \
-    "$SINK/$output_name.csv" \
+    "$SINK/$output_name" \
     >"$LOGS/$output_name.stdout.log" \
     2>"$LOGS/$output_name.stderr.log"
 ) done
