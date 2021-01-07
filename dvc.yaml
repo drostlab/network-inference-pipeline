@@ -387,3 +387,87 @@ stages:
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/PUC
+  plot_Yang_GENIE3R:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+      results/Yang/networks/GENIE3-R
+      results/Yang/plots/GENIE3-R
+      logs/Yang/plots/GENIE3-R
+      Rscript src/plotting/plot_for_network.R src/plotting/load_genie3r_network.function.R png
+    deps:
+    - results/Yang/networks/GENIE3-R
+    - results/tooling/R-multitool.specification
+    - src/plotting/plot_foreach_network.sh
+    - src/plotting/plot_for_network.R
+    - src/plotting/load_genie3r_network.function.R
+    outs:
+    - results/Yang/plots/GENIE3-R
+  plot_Cuomo_GENIE3R:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+      results/Cuomo/networks/GENIE3-R
+      results/Cuomo/plots/GENIE3-R
+      logs/Cuomo/plots/GENIE3-R
+      Rscript src/plotting/plot_for_network.R src/plotting/load_genie3r_network.function.R png
+    deps:
+    - results/Cuomo/networks/GENIE3-R
+    - results/tooling/R-multitool.specification
+    - src/plotting/plot_foreach_network.sh
+    - src/plotting/plot_for_network.R
+    - src/plotting/load_genie3r_network.function.R
+    outs:
+    - results/Cuomo/plots/GENIE3-R
+  plot_Yang_LEAP:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+      results/Yang/networks/LEAP
+      results/Yang/plots/LEAP
+      logs/Yang/plots/LEAP
+      Rscript src/plotting/plot_for_network.R src/plotting/load_leap_network.function.R png
+    deps:
+    - results/Yang/networks/LEAP
+    - results/tooling/R-multitool.specification
+    - src/plotting/plot_foreach_network.sh
+    - src/plotting/plot_for_network.R
+    - src/plotting/load_leap_network.function.R
+    outs:
+    - results/Yang/plots/LEAP
+  plot_Cuomo_LEAP:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+      results/Cuomo/networks/LEAP
+      results/Cuomo/plots/LEAP
+      logs/Cuomo/plots/LEAP
+      Rscript src/plotting/plot_for_network.R src/plotting/load_leap_network.function.R png
+    deps:
+    - results/Cuomo/networks/LEAP
+    - results/tooling/R-multitool.specification
+    - src/plotting/plot_foreach_network.sh
+    - src/plotting/plot_for_network.R
+    - src/plotting/load_leap_network.function.R
+    outs:
+    - results/Cuomo/plots/LEAP
+  plot_Yang_GRNBoost2:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+      results/Yang/networks/GRNBoost2
+      results/Yang/plots/GRNBoost2
+      logs/Yang/plots/GRNBoost2
+      Rscript src/plotting/plot_for_network.R src/plotting/load_grnboost2_network.function.R png
+    deps:
+    - results/Yang/networks/GRNBoost2
+    - results/tooling/R-multitool.specification
+    - src/plotting/plot_foreach_network.sh
+    - src/plotting/plot_for_network.R
+    - src/plotting/load_grnboost2_network.function.R
+    outs:
+    - results/Yang/plots/GRNBoost2
+  plot_Cuomo_GRNBoost2:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+      results/Cuomo/networks/GRNBoost2
+      results/Cuomo/plots/GRNBoost2
+      logs/Cuomo/plots/GRNBoost2
+      Rscript src/plotting/plot_for_network.R src/plotting/load_grnboost2_network.function.R png
+    deps:
+    - results/Cuomo/networks/GRNBoost2
+    - results/tooling/R-multitool.specification
+    - src/plotting/plot_foreach_network.sh
+    - src/plotting/plot_for_network.R
+    - src/plotting/load_grnboost2_network.function.R
+    outs:
+    - results/Cuomo/plots/GRNBoost2

@@ -135,8 +135,8 @@ plot_Cuomo_NetworkInferenceJl_PUC:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -248,8 +248,8 @@ plot_Yang_NetworkInferenceJl_PIDC:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -357,8 +357,8 @@ plot_Cuomo_NetworkInferenceJl_MI:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -504,8 +504,8 @@ plot_Cuomo_NetworkInferenceJl_CLR:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -555,8 +555,8 @@ plot_Cuomo_NetworkInferenceJl_PIDC:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -605,8 +605,8 @@ plot_Yang_NetworkInferenceJl_PUC:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -632,8 +632,8 @@ plot_Yang_NetworkInferenceJl_MI:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -683,8 +683,8 @@ plot_Yang_NetworkInferenceJl_CLR:
     md5: 680649f2a2d86d406e0e96713e296e98
     size: 492
   - path: src/plotting/plot_for_network.R
-    md5: df09458db3e3d89a4c63e8f89fe04177
-    size: 1390
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
   - path: src/plotting/plot_foreach_network.sh
     md5: d80dad82b0d1c959ad7e41bb0e63d2aa
     size: 1166
@@ -717,3 +717,163 @@ infer_Cuomo_GENIE3R:
     md5: 1717592ecfdec4fb6e5abb5f1248f2f9.dir
     size: 6477589
     nfiles: 12
+plot_Yang_GRNBoost2:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    results/Yang/networks/GRNBoost2 results/Yang/plots/GRNBoost2 logs/Yang/plots/GRNBoost2
+    Rscript src/plotting/plot_for_network.R src/plotting/load_grnboost2_network.function.R
+    png
+  deps:
+  - path: results/Yang/networks/GRNBoost2
+    md5: a452c8dc679c51c38f84a52668ae783b.dir
+    size: 248170094
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: e4ac8da2dcd20e94e5f66828b14d9a1b
+    size: 503
+  - path: src/plotting/load_grnboost2_network.function.R
+    md5: 74f8b4b818ad944073f6f7af210b5e7a
+    size: 404
+  - path: src/plotting/plot_for_network.R
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
+  - path: src/plotting/plot_foreach_network.sh
+    md5: d80dad82b0d1c959ad7e41bb0e63d2aa
+    size: 1166
+  outs:
+  - path: results/Yang/plots/GRNBoost2
+    md5: ce0648c09003579d077747240a2d09c2.dir
+    size: 77667712
+    nfiles: 80
+plot_Cuomo_LEAP:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    results/Cuomo/networks/LEAP results/Cuomo/plots/LEAP logs/Cuomo/plots/LEAP Rscript
+    src/plotting/plot_for_network.R src/plotting/load_leap_network.function.R png
+  deps:
+  - path: results/Cuomo/networks/LEAP
+    md5: 272c21559d1705c51983dbbf2c42866d.dir
+    size: 16160805
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: e4ac8da2dcd20e94e5f66828b14d9a1b
+    size: 503
+  - path: src/plotting/load_leap_network.function.R
+    md5: 3a4deadcf36f7b44c533a641bf06d38c
+    size: 410
+  - path: src/plotting/plot_for_network.R
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
+  - path: src/plotting/plot_foreach_network.sh
+    md5: d80dad82b0d1c959ad7e41bb0e63d2aa
+    size: 1166
+  outs:
+  - path: results/Cuomo/plots/LEAP
+    md5: 8e694ceab447420e3ef0c4af755ed279.dir
+    size: 43489478
+    nfiles: 48
+plot_Cuomo_GRNBoost2:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    results/Cuomo/networks/GRNBoost2 results/Cuomo/plots/GRNBoost2 logs/Cuomo/plots/GRNBoost2
+    Rscript src/plotting/plot_for_network.R src/plotting/load_grnboost2_network.function.R
+    png
+  deps:
+  - path: results/Cuomo/networks/GRNBoost2
+    md5: 01b3d1a245c0bd7ecef79f0e173668bf.dir
+    size: 15531534
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: e4ac8da2dcd20e94e5f66828b14d9a1b
+    size: 503
+  - path: src/plotting/load_grnboost2_network.function.R
+    md5: 74f8b4b818ad944073f6f7af210b5e7a
+    size: 404
+  - path: src/plotting/plot_for_network.R
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
+  - path: src/plotting/plot_foreach_network.sh
+    md5: d80dad82b0d1c959ad7e41bb0e63d2aa
+    size: 1166
+  outs:
+  - path: results/Cuomo/plots/GRNBoost2
+    md5: 1aa4eaa3c9deeb90fc8287dfd18aa8f6.dir
+    size: 44059192
+    nfiles: 48
+plot_Cuomo_GENIE3R:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    results/Cuomo/networks/GENIE3-R results/Cuomo/plots/GENIE3-R logs/Cuomo/plots/GENIE3-R
+    Rscript src/plotting/plot_for_network.R src/plotting/load_genie3r_network.function.R
+    png
+  deps:
+  - path: results/Cuomo/networks/GENIE3-R
+    md5: 1717592ecfdec4fb6e5abb5f1248f2f9.dir
+    size: 6477589
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: e4ac8da2dcd20e94e5f66828b14d9a1b
+    size: 503
+  - path: src/plotting/load_genie3r_network.function.R
+    md5: 1eb0578242a9668c7a719cd657466b1a
+    size: 64
+  - path: src/plotting/plot_for_network.R
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
+  - path: src/plotting/plot_foreach_network.sh
+    md5: d80dad82b0d1c959ad7e41bb0e63d2aa
+    size: 1166
+  outs:
+  - path: results/Cuomo/plots/GENIE3-R
+    md5: 5f241d9ae3090368c76b78ed0a7a95a1.dir
+    size: 45641360
+    nfiles: 48
+plot_Yang_LEAP:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    results/Yang/networks/LEAP results/Yang/plots/LEAP logs/Yang/plots/LEAP Rscript
+    src/plotting/plot_for_network.R src/plotting/load_leap_network.function.R png
+  deps:
+  - path: results/Yang/networks/LEAP
+    md5: f23554fb7e99523f631aeed408c70975.dir
+    size: 292984927
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: e4ac8da2dcd20e94e5f66828b14d9a1b
+    size: 503
+  - path: src/plotting/load_leap_network.function.R
+    md5: 3a4deadcf36f7b44c533a641bf06d38c
+    size: 410
+  - path: src/plotting/plot_for_network.R
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
+  - path: src/plotting/plot_foreach_network.sh
+    md5: d80dad82b0d1c959ad7e41bb0e63d2aa
+    size: 1166
+  outs:
+  - path: results/Yang/plots/LEAP
+    md5: 2caad77dd0537b60cd3e6e3c86423f56.dir
+    size: 76039334
+    nfiles: 80
+plot_Yang_GENIE3R:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    results/Yang/networks/GENIE3-R results/Yang/plots/GENIE3-R logs/Yang/plots/GENIE3-R
+    Rscript src/plotting/plot_for_network.R src/plotting/load_genie3r_network.function.R
+    png
+  deps:
+  - path: results/Yang/networks/GENIE3-R
+    md5: bce7a956ca42a46edbd15bdb0d752542.dir
+    size: 100125335
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: e4ac8da2dcd20e94e5f66828b14d9a1b
+    size: 503
+  - path: src/plotting/load_genie3r_network.function.R
+    md5: 1eb0578242a9668c7a719cd657466b1a
+    size: 64
+  - path: src/plotting/plot_for_network.R
+    md5: 0d08bab75847881e3d74e99f4d43d315
+    size: 1548
+  - path: src/plotting/plot_foreach_network.sh
+    md5: d80dad82b0d1c959ad7e41bb0e63d2aa
+    size: 1166
+  outs:
+  - path: results/Yang/plots/GENIE3-R
+    md5: 47ae809e41b8acc7624bfe4a2c5e62ac.dir
+    size: 78513629
+    nfiles: 80

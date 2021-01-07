@@ -5,6 +5,11 @@ input_filename <- arguments[3]
 output_filename_template <- arguments[4]
 
 input <- eval(parse(input_adaptor))(input_filename)
+
+# Circumvent broken `make_symmetric` in `edgynode` by doing it ourselves for
+# now. Since this is idempotent, it won't hurt.
+input <- pmax(input, t(input))
+
 rescaled <- edgynode::network_rescale(input)
 
 output_directory <- dirname(output_filename_template)
