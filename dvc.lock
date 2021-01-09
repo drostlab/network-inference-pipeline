@@ -182,20 +182,20 @@ clean_Yang_data:
     md5: 917002724dbc39a7e5e1ca4f91964e5f
     size: 82
   - path: src/clean_Yang.sh
-    md5: d55ec43240081dfa6bbbca42b5ec0903
-    size: 403
+    md5: 5458bb69bb111264b46024108b13c7eb
+    size: 496
   outs:
   - path: results/Yang/clean
-    md5: f23b9caf389273d45067077efac43aa6.dir
-    size: 19900176
-    nfiles: 9
+    md5: 880616aefbff01bd449bf695ad38c861.dir
+    size: 19900423
+    nfiles: 10
 slice_Yang_data:
   cmd: singularity run toolbox/bin/utilities.sif src/slice.sh results/Yang/clean results/Yang/sliced
   deps:
   - path: results/Yang/clean
-    md5: f23b9caf389273d45067077efac43aa6.dir
-    size: 19900176
-    nfiles: 9
+    md5: 880616aefbff01bd449bf695ad38c861.dir
+    size: 19900423
+    nfiles: 10
   - path: results/tooling/utilities.specification
     md5: 917002724dbc39a7e5e1ca4f91964e5f
     size: 82
@@ -294,12 +294,12 @@ infer_Cuomo_GRNBoost2:
     nfiles: 12
 infer_Yang_LEAP:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/infer_foreach_slice.sh
-    results/Yang/sliced results/Yang/networks/LEAP logs/Yang/networks/LEAP Rscript
+    results/Yang/sliced_fused results/Yang/networks/LEAP logs/Yang/networks/LEAP Rscript
     src/LEAP/infer_network.R
   deps:
-  - path: results/Yang/sliced
-    md5: adf110ad2c8a3552848e39dcc19346c9.dir
-    size: 1460710
+  - path: results/Yang/sliced_fused
+    md5: 6a859b19c32eecff3a64d5edf4a21cc2.dir
+    size: 830878
     nfiles: 20
   - path: results/tooling/R-multitool.specification
     md5: e4ac8da2dcd20e94e5f66828b14d9a1b
@@ -313,8 +313,8 @@ infer_Yang_LEAP:
     size: 1174
   outs:
   - path: results/Yang/networks/LEAP
-    md5: f23554fb7e99523f631aeed408c70975.dir
-    size: 292984927
+    md5: a7ceecd5b257d14c53804e0988050cb4.dir
+    size: 291831960
     nfiles: 20
 infer_Cuomo_NetworkInferenceJl_MI:
   cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/infer_foreach_slice.sh
@@ -830,8 +830,8 @@ plot_Yang_LEAP:
     src/plotting/plot_for_network.R src/plotting/load_leap_network.function.R png
   deps:
   - path: results/Yang/networks/LEAP
-    md5: f23554fb7e99523f631aeed408c70975.dir
-    size: 292984927
+    md5: a7ceecd5b257d14c53804e0988050cb4.dir
+    size: 291831960
     nfiles: 20
   - path: results/tooling/R-multitool.specification
     md5: e4ac8da2dcd20e94e5f66828b14d9a1b
@@ -847,8 +847,8 @@ plot_Yang_LEAP:
     size: 1166
   outs:
   - path: results/Yang/plots/LEAP
-    md5: 2caad77dd0537b60cd3e6e3c86423f56.dir
-    size: 76039334
+    md5: 460bdfc90719924694d0c333dc6ed59c.dir
+    size: 77041626
     nfiles: 80
 plot_Yang_GENIE3R:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
@@ -877,3 +877,43 @@ plot_Yang_GENIE3R:
     md5: 47ae809e41b8acc7624bfe4a2c5e62ac.dir
     size: 78513629
     nfiles: 80
+fuse_Yang_data:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/fuse_samples_foreach.sh
+    results/Yang/clean results/Yang/fused
+  deps:
+  - path: results/Yang/clean
+    md5: 880616aefbff01bd449bf695ad38c861.dir
+    size: 19900423
+    nfiles: 10
+  - path: results/tooling/R-multitool.specification
+    md5: e4ac8da2dcd20e94e5f66828b14d9a1b
+    size: 503
+  - path: src/fuse_samples.R
+    md5: 3351b6a733b256c9d0463044aef0f8a9
+    size: 819
+  - path: src/fuse_samples_foreach.sh
+    md5: 05d135f5dce0c1ecf83e8d5fda2ae669
+    size: 301
+  outs:
+  - path: results/Yang/fused
+    md5: 13a12fee476c701e84239ca23092ef2f.dir
+    size: 11903076
+    nfiles: 9
+slice_Yang_fused_data:
+  cmd: singularity run toolbox/bin/utilities.sif src/slice.sh results/Yang/fused results/Yang/sliced_fused
+  deps:
+  - path: results/Yang/fused
+    md5: 13a12fee476c701e84239ca23092ef2f.dir
+    size: 11903076
+    nfiles: 9
+  - path: results/tooling/utilities.specification
+    md5: 917002724dbc39a7e5e1ca4f91964e5f
+    size: 82
+  - path: src/slice.sh
+    md5: b8c2aebb69164ab9c85b755ae42ba22e
+    size: 409
+  outs:
+  - path: results/Yang/sliced_fused
+    md5: 6a859b19c32eecff3a64d5edf4a21cc2.dir
+    size: 830878
+    nfiles: 20

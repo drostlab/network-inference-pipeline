@@ -18,3 +18,5 @@ for f in genes_*.csv; do
   # Insert a (single-column) header and normalize inputs
   echo '"gene"' | cat - $f | xsv input >"$SINK/$f"
 done
+
+xsv select id_df,time metadata.csv | sed 's/^id_df,time/sample,group/' >"$SINK/samples.csv"
