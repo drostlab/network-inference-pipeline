@@ -283,184 +283,197 @@ stages:
     outs:
     - results/Cuomo/networks/GRNBoost2
   plot_Yang_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Yang/networks/NetworkInference.jl/CLR
       results/Yang/plots/NetworkInference.jl/CLR
       logs/Yang/plots/NetworkInference.jl/CLR
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/CLR
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Yang_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/CLR
   plot_Cuomo_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Cuomo/networks/NetworkInference.jl/CLR
       results/Cuomo/plots/NetworkInference.jl/CLR
       logs/Cuomo/plots/NetworkInference.jl/CLR
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/CLR
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Cuomo_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/CLR
   plot_Yang_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Yang/networks/NetworkInference.jl/MI
       results/Yang/plots/NetworkInference.jl/MI
       logs/Yang/plots/NetworkInference.jl/MI
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/MI
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Yang_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/MI
   plot_Cuomo_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Cuomo/networks/NetworkInference.jl/MI
       results/Cuomo/plots/NetworkInference.jl/MI
       logs/Cuomo/plots/NetworkInference.jl/MI
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/MI
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Cuomo_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/MI
   plot_Yang_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Yang/networks/NetworkInference.jl/PIDC
       results/Yang/plots/NetworkInference.jl/PIDC
       logs/Yang/plots/NetworkInference.jl/PIDC
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/PIDC
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Yang_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/PIDC
   plot_Cuomo_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Cuomo/networks/NetworkInference.jl/PIDC
       results/Cuomo/plots/NetworkInference.jl/PIDC
       logs/Cuomo/plots/NetworkInference.jl/PIDC
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/PIDC
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Cuomo_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/PIDC
   plot_Yang_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Yang/networks/NetworkInference.jl/PUC
       results/Yang/plots/NetworkInference.jl/PUC
       logs/Yang/plots/NetworkInference.jl/PUC
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/PUC
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Yang_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/PUC
   plot_Cuomo_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Cuomo/networks/NetworkInference.jl/PUC
       results/Cuomo/plots/NetworkInference.jl/PUC
       logs/Cuomo/plots/NetworkInference.jl/PUC
-      Rscript src/plotting/plot_for_network.R src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/PUC
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Cuomo_variants.csv
     - src/plotting/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/PUC
   plot_Yang_GENIE3R:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Yang/networks/GENIE3-R
       results/Yang/plots/GENIE3-R
       logs/Yang/plots/GENIE3-R
-      Rscript src/plotting/plot_for_network.R src/plotting/load_genie3r_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_genie3r_network.function.R png
     deps:
     - results/Yang/networks/GENIE3-R
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Yang_variants.csv
     - src/plotting/load_genie3r_network.function.R
     outs:
     - results/Yang/plots/GENIE3-R
   plot_Cuomo_GENIE3R:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Cuomo/networks/GENIE3-R
       results/Cuomo/plots/GENIE3-R
       logs/Cuomo/plots/GENIE3-R
-      Rscript src/plotting/plot_for_network.R src/plotting/load_genie3r_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_genie3r_network.function.R png
     deps:
     - results/Cuomo/networks/GENIE3-R
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Cuomo_variants.csv
     - src/plotting/load_genie3r_network.function.R
     outs:
     - results/Cuomo/plots/GENIE3-R
   plot_Yang_LEAP:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Yang/networks/LEAP
       results/Yang/plots/LEAP
       logs/Yang/plots/LEAP
-      Rscript src/plotting/plot_for_network.R src/plotting/load_leap_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_leap_network.function.R png
     deps:
     - results/Yang/networks/LEAP
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Yang_variants.csv
     - src/plotting/load_leap_network.function.R
     outs:
     - results/Yang/plots/LEAP
   plot_Yang_GRNBoost2:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Yang/networks/GRNBoost2
       results/Yang/plots/GRNBoost2
       logs/Yang/plots/GRNBoost2
-      Rscript src/plotting/plot_for_network.R src/plotting/load_grnboost2_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_grnboost2_network.function.R png
     deps:
     - results/Yang/networks/GRNBoost2
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Yang_variants.csv
     - src/plotting/load_grnboost2_network.function.R
     outs:
     - results/Yang/plots/GRNBoost2
   plot_Cuomo_GRNBoost2:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_network.sh
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
       results/Cuomo/networks/GRNBoost2
       results/Cuomo/plots/GRNBoost2
       logs/Cuomo/plots/GRNBoost2
-      Rscript src/plotting/plot_for_network.R src/plotting/load_grnboost2_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_grnboost2_network.function.R png
     deps:
     - results/Cuomo/networks/GRNBoost2
     - results/tooling/R-multitool.specification
-    - src/plotting/plot_foreach_network.sh
-    - src/plotting/plot_for_network.R
+    - src/plotting/plot_foreach_slice.sh
+    - src/plotting/plot_for_network_variants.R
+    - src/plotting/Cuomo_variants.csv
     - src/plotting/load_grnboost2_network.function.R
     outs:
     - results/Cuomo/plots/GRNBoost2

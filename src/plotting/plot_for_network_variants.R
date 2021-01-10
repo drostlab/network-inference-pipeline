@@ -12,11 +12,57 @@ input_filename_template <- basename(input_path_template)
 output_directory <- dirname(output_path_template)
 output_filename_template <- basename(output_path_template)
 
+save_plot <- function(name, plot) {
+  ggplot2::ggsave(
+    plot = plot,
+    file = paste0(
+      output_directory,
+      "/",
+      name,
+      "_",
+      output_filename_template,
+      ".",
+      output_extension
+    )
+  )
+}
+
+save_individual_plots <- function(variant, network) {
+  save_plot(
+    name = paste0("degree_distribution_naive_", variant),
+    plot = edgynode::plot_network_degree_distribution_naive(
+      edgynode::network_statistics_degree_distribution_naive(network)
+    )
+  )
+  save_plot(
+    name = paste0("weight_distribution_", variant),
+    plot = edgynode::plot_network_weight_distribution(
+      network,
+      threshold = "median"
+    )
+  )
+  save_plot(
+    name = paste0("weight_distribution_boxplot_", variant),
+    plot = edgynode::plot_network_weight_distribution_boxplot(
+      network,
+      threshold = "median"
+    )
+  )
+  save_plot(
+    name = paste0("weight_distribution_violin_", variant),
+    plot = edgynode::plot_network_weight_distribution_violin(
+      network,
+      threshold = "median"
+    )
+  )
+}
+
 for (name in rownames(variants)) {
+  variant <- variants[name, "VARIANT"]
   input <- load_network(
     file.path(
       input_directory,
-      sub("VARIANT", variants[name, "VARIANT"], input_filename_template)
+      sub("VARIANT", variant, input_filename_template)
     )
   )
 
@@ -26,6 +72,7 @@ for (name in rownames(variants)) {
 
   rescaled <- edgynode::network_rescale(input)
 
+  save_individual_plots(variant, rescaled)
   assign(name, rescaled)
 }
 
