@@ -27,56 +27,56 @@ stages:
     - toolbox/bin/R-multitool.sif
     outs:
     - results/tooling/R-multitool.specification
-  acquire_Yang_data:
-    cmd: mkdir -p results/Yang/raw && cp inputs/bulk_Yang-20210102T132322Z-001.zip
-      results/Yang/raw/Yang.zip
+  acquire_data:
+    cmd: mkdir -p results &&
+      wget -O results/raw-inputs.zip https://ndownloader.figshare.com/files/26052149
     deps:
-    - inputs/bulk_Yang-20201211T162105Z-001.zip
+      - https://ndownloader.figshare.com/files/26052149
     outs:
-    - results/Yang/raw/Yang.zip
-  acquire_Cuomo_data:
-    cmd: mkdir -p results/Cuomo/raw && cp inputs/SC_Cuomo-20210102T132349Z-001.zip
-      results/Cuomo/raw/Cuomo.zip
-    deps:
-    - inputs/SC_Cuomo-20201211T162156Z-001.zip
-    outs:
-    - results/Cuomo/raw/Cuomo.zip
+      - results/raw-inputs.zip
   extract_Yang_data:
-    cmd: singularity run toolbox/bin/utilities.sif unzip results/Yang/raw/Yang.zip
-      -d results/Yang/raw
+    cmd: singularity exec toolbox/bin/utilities.sif sh src/extract_data.sh
+      results/raw-inputs.zip
+      "noise_GRN_share/bulk_Yang/*"
+      results/Yang/raw
     deps:
-    - results/Yang/raw/Yang.zip
+    - results/raw-inputs.zip
     - results/tooling/utilities.specification
     outs:
-    - results/Yang/raw/bulk_Yang
+    - results/Yang/raw
   extract_Cuomo_data:
-    cmd: singularity run toolbox/bin/utilities.sif unzip results/Cuomo/raw/Cuomo.zip
-      -d results/Cuomo/raw
+    cmd: singularity exec toolbox/bin/utilities.sif sh src/extract_data.sh
+      results/raw-inputs.zip
+      "noise_GRN_share/SC_Cuomo/*"
+      results/Cuomo/raw
     deps:
-    - results/Cuomo/raw/Cuomo.zip
+    - results/raw-inputs.zip
     - results/tooling/utilities.specification
     outs:
-    - results/Cuomo/raw/SC_Cuomo
+    - results/Cuomo/raw
   clean_Yang_data:
-    cmd: singularity run toolbox/bin/utilities.sif src/clean_Yang.sh results/Yang/raw/bulk_Yang
+    cmd: singularity exec toolbox/bin/utilities.sif sh src/clean_Yang.sh
+      results/Yang/raw
       results/Yang/clean
     deps:
-    - results/Yang/raw/bulk_Yang
+    - results/Yang/raw
     - results/tooling/utilities.specification
     - src/clean_Yang.sh
     outs:
     - results/Yang/clean
   clean_Cuomo_data:
-    cmd: singularity run toolbox/bin/utilities.sif src/clean_Cuomo.sh results/Cuomo/raw/SC_Cuomo
+    cmd: singularity exec toolbox/bin/utilities.sif sh src/clean_Cuomo.sh
+      results/Cuomo/raw
       results/Cuomo/clean
     deps:
-    - results/Cuomo/raw/SC_Cuomo
+    - results/Cuomo/raw
     - results/tooling/utilities.specification
     - src/clean_Cuomo.sh
     outs:
     - results/Cuomo/clean
   slice_Yang_data:
-    cmd: singularity run toolbox/bin/utilities.sif src/slice.sh results/Yang/clean
+    cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
+      results/Yang/clean
       results/Yang/sliced
     deps:
     - results/Yang/clean
@@ -96,7 +96,8 @@ stages:
     outs:
     - results/Yang/fused
   slice_Yang_fused_data:
-    cmd: singularity run toolbox/bin/utilities.sif src/slice.sh results/Yang/fused
+    cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
+      results/Yang/fused
       results/Yang/sliced_fused
     deps:
     - results/Yang/fused
@@ -105,7 +106,8 @@ stages:
     outs:
     - results/Yang/sliced_fused
   slice_Cuomo_data:
-    cmd: singularity run toolbox/bin/utilities.sif src/slice.sh results/Cuomo/clean
+    cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
+      results/Cuomo/clean
       results/Cuomo/sliced
     deps:
     - results/Cuomo/clean
