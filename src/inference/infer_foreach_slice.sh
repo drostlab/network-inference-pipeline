@@ -29,7 +29,7 @@ mkdir -p "$BASE/$SINK"
 mkdir -p "$BASE/$LOGS"
 
 for f in counts_*.csv; do (
-  cd $BASE
+  cd "$BASE"
   output_name="network_$(echo $f | sed 's/^counts_\(.*\).csv/\1/')"
   set -x
   time $@ \

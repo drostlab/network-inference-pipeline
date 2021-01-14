@@ -13,7 +13,7 @@ cd "$SOURCE"
 mkdir -p "$BASE/$SINK"
 
 for f in counts_*.csv; do (
-  cd $BASE
+  cd "$BASE"
   set -x
   Rscript src/fuse_samples.R "$SOURCE/$f" "$SOURCE/samples.csv" "$SINK/$f"
 ) done
