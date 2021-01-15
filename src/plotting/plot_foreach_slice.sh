@@ -31,7 +31,7 @@ mkdir -p "$BASE/$LOGS"
 for f in network_raw_*.csv; do (
   cd "$BASE"
   input_name="$(echo $f | sed 's/^network_raw_\(.*\)/network_VARIANT_\1/')"
-  output_name="$(echo $f | sed 's/^network_\(.*\).csv/\1/')"
+  output_name="$(echo $f | sed 's/^network_raw_\(.*\).csv/\1/')"
   set -x
   time $@ \
     "$SOURCE/$input_name" \
