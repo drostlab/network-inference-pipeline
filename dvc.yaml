@@ -289,14 +289,14 @@ stages:
       results/Yang/networks/NetworkInference.jl/CLR
       results/Yang/plots/NetworkInference.jl/CLR
       logs/Yang/plots/NetworkInference.jl/CLR
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/CLR
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Yang_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/CLR
   plot_Cuomo_NetworkInferenceJl_CLR:
@@ -304,14 +304,14 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/CLR
       results/Cuomo/plots/NetworkInference.jl/CLR
       logs/Cuomo/plots/NetworkInference.jl/CLR
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/CLR
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Cuomo_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/CLR
   plot_Yang_NetworkInferenceJl_MI:
@@ -319,14 +319,14 @@ stages:
       results/Yang/networks/NetworkInference.jl/MI
       results/Yang/plots/NetworkInference.jl/MI
       logs/Yang/plots/NetworkInference.jl/MI
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/MI
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Yang_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/MI
   plot_Cuomo_NetworkInferenceJl_MI:
@@ -334,14 +334,14 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/MI
       results/Cuomo/plots/NetworkInference.jl/MI
       logs/Cuomo/plots/NetworkInference.jl/MI
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/MI
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Cuomo_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/MI
   plot_Yang_NetworkInferenceJl_PIDC:
@@ -349,14 +349,14 @@ stages:
       results/Yang/networks/NetworkInference.jl/PIDC
       results/Yang/plots/NetworkInference.jl/PIDC
       logs/Yang/plots/NetworkInference.jl/PIDC
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/PIDC
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Yang_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/PIDC
   plot_Cuomo_NetworkInferenceJl_PIDC:
@@ -364,14 +364,14 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/PIDC
       results/Cuomo/plots/NetworkInference.jl/PIDC
       logs/Cuomo/plots/NetworkInference.jl/PIDC
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/PIDC
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Cuomo_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/PIDC
   plot_Yang_NetworkInferenceJl_PUC:
@@ -379,14 +379,14 @@ stages:
       results/Yang/networks/NetworkInference.jl/PUC
       results/Yang/plots/NetworkInference.jl/PUC
       logs/Yang/plots/NetworkInference.jl/PUC
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/PUC
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Yang_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/plots/NetworkInference.jl/PUC
   plot_Cuomo_NetworkInferenceJl_PUC:
@@ -394,14 +394,14 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/PUC
       results/Cuomo/plots/NetworkInference.jl/PUC
       logs/Cuomo/plots/NetworkInference.jl/PUC
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/PUC
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Cuomo_variants.csv
-    - src/plotting/load_network_inference_jl_network.function.R
+    - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/plots/NetworkInference.jl/PUC
   plot_Yang_GENIE3R:
@@ -409,14 +409,14 @@ stages:
       results/Yang/networks/GENIE3-R
       results/Yang/plots/GENIE3-R
       logs/Yang/plots/GENIE3-R
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_genie3r_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_genie3r_network.function.R png
     deps:
     - results/Yang/networks/GENIE3-R
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Yang_variants.csv
-    - src/plotting/load_genie3r_network.function.R
+    - src/analysis/load_genie3r_network.function.R
     outs:
     - results/Yang/plots/GENIE3-R
   plot_Cuomo_GENIE3R:
@@ -424,14 +424,14 @@ stages:
       results/Cuomo/networks/GENIE3-R
       results/Cuomo/plots/GENIE3-R
       logs/Cuomo/plots/GENIE3-R
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_genie3r_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/analysis/load_genie3r_network.function.R png
     deps:
     - results/Cuomo/networks/GENIE3-R
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Cuomo_variants.csv
-    - src/plotting/load_genie3r_network.function.R
+    - src/analysis/load_genie3r_network.function.R
     outs:
     - results/Cuomo/plots/GENIE3-R
   plot_Yang_LEAP:
@@ -439,14 +439,14 @@ stages:
       results/Yang/networks/LEAP
       results/Yang/plots/LEAP
       logs/Yang/plots/LEAP
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_leap_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_leap_network.function.R png
     deps:
     - results/Yang/networks/LEAP
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Yang_variants.csv
-    - src/plotting/load_leap_network.function.R
+    - src/analysis/load_leap_network.function.R
     outs:
     - results/Yang/plots/LEAP
   plot_Yang_GRNBoost2:
@@ -454,14 +454,14 @@ stages:
       results/Yang/networks/GRNBoost2
       results/Yang/plots/GRNBoost2
       logs/Yang/plots/GRNBoost2
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_grnboost2_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_grnboost2_network.function.R png
     deps:
     - results/Yang/networks/GRNBoost2
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Yang_variants.csv
-    - src/plotting/load_grnboost2_network.function.R
+    - src/analysis/load_grnboost2_network.function.R
     outs:
     - results/Yang/plots/GRNBoost2
   plot_Cuomo_GRNBoost2:
@@ -469,13 +469,208 @@ stages:
       results/Cuomo/networks/GRNBoost2
       results/Cuomo/plots/GRNBoost2
       logs/Cuomo/plots/GRNBoost2
-      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/plotting/load_grnboost2_network.function.R png
+      Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv src/analysis/load_grnboost2_network.function.R png
     deps:
     - results/Cuomo/networks/GRNBoost2
     - results/tooling/R-multitool.specification
     - src/plotting/plot_foreach_slice.sh
     - src/plotting/plot_for_network_variants.R
     - src/plotting/Cuomo_variants.csv
-    - src/plotting/load_grnboost2_network.function.R
+    - src/analysis/load_grnboost2_network.function.R
     outs:
     - results/Cuomo/plots/GRNBoost2
+  calculate_Yang_NetworkInferenceJl_CLR_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Yang/networks/NetworkInference.jl/CLR
+      results/Yang/degrees/NetworkInference.jl/CLR
+      logs/Yang/degrees/NetworkInference.jl/CLR
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Yang/networks/NetworkInference.jl/CLR
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Yang/degrees/NetworkInference.jl/CLR
+  calculate_Cuomo_NetworkInferenceJl_CLR_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Cuomo/networks/NetworkInference.jl/CLR
+      results/Cuomo/degrees/NetworkInference.jl/CLR
+      logs/Cuomo/degrees/NetworkInference.jl/CLR
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Cuomo/networks/NetworkInference.jl/CLR
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Cuomo/degrees/NetworkInference.jl/CLR
+  calculate_Yang_NetworkInferenceJl_MI_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Yang/networks/NetworkInference.jl/MI
+      results/Yang/degrees/NetworkInference.jl/MI
+      logs/Yang/degrees/NetworkInference.jl/MI
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Yang/networks/NetworkInference.jl/MI
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Yang/degrees/NetworkInference.jl/MI
+  calculate_Cuomo_NetworkInferenceJl_MI_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Cuomo/networks/NetworkInference.jl/MI
+      results/Cuomo/degrees/NetworkInference.jl/MI
+      logs/Cuomo/degrees/NetworkInference.jl/MI
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Cuomo/networks/NetworkInference.jl/MI
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Cuomo/degrees/NetworkInference.jl/MI
+  calculate_Yang_NetworkInferenceJl_PIDC_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Yang/networks/NetworkInference.jl/PIDC
+      results/Yang/degrees/NetworkInference.jl/PIDC
+      logs/Yang/degrees/NetworkInference.jl/PIDC
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Yang/networks/NetworkInference.jl/PIDC
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Yang/degrees/NetworkInference.jl/PIDC
+  calculate_Cuomo_NetworkInferenceJl_PIDC_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Cuomo/networks/NetworkInference.jl/PIDC
+      results/Cuomo/degrees/NetworkInference.jl/PIDC
+      logs/Cuomo/degrees/NetworkInference.jl/PIDC
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Cuomo/networks/NetworkInference.jl/PIDC
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Cuomo/degrees/NetworkInference.jl/PIDC
+  calculate_Yang_NetworkInferenceJl_PUC_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Yang/networks/NetworkInference.jl/PUC
+      results/Yang/degrees/NetworkInference.jl/PUC
+      logs/Yang/degrees/NetworkInference.jl/PUC
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Yang/networks/NetworkInference.jl/PUC
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Yang/degrees/NetworkInference.jl/PUC
+  calculate_Cuomo_NetworkInferenceJl_PUC_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Cuomo/networks/NetworkInference.jl/PUC
+      results/Cuomo/degrees/NetworkInference.jl/PUC
+      logs/Cuomo/degrees/NetworkInference.jl/PUC
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_network_inference_jl_network.function.R
+    deps:
+    - results/Cuomo/networks/NetworkInference.jl/PUC
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_network_inference_jl_network.function.R
+    outs:
+    - results/Cuomo/degrees/NetworkInference.jl/PUC
+  calculate_Yang_GENIE3R_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Yang/networks/GENIE3-R
+      results/Yang/degrees/GENIE3-R
+      logs/Yang/degrees/GENIE3-R
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_genie3r_network.function.R
+    deps:
+    - results/Yang/networks/GENIE3-R
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_genie3r_network.function.R
+    outs:
+    - results/Yang/degrees/GENIE3-R
+  calculate_Cuomo_GENIE3R_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Cuomo/networks/GENIE3-R
+      results/Cuomo/degrees/GENIE3-R
+      logs/Cuomo/degrees/GENIE3-R
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_genie3r_network.function.R
+    deps:
+    - results/Cuomo/networks/GENIE3-R
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_genie3r_network.function.R
+    outs:
+    - results/Cuomo/degrees/GENIE3-R
+  calculate_Yang_LEAP_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Yang/networks/LEAP
+      results/Yang/degrees/LEAP
+      logs/Yang/degrees/LEAP
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_leap_network.function.R
+    deps:
+    - results/Yang/networks/LEAP
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_leap_network.function.R
+    outs:
+    - results/Yang/degrees/LEAP
+  calculate_Yang_GRNBoost2_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Yang/networks/GRNBoost2
+      results/Yang/degrees/GRNBoost2
+      logs/Yang/degrees/GRNBoost2
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_grnboost2_network.function.R
+    deps:
+    - results/Yang/networks/GRNBoost2
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_grnboost2_network.function.R
+    outs:
+    - results/Yang/degrees/GRNBoost2
+  calculate_Cuomo_GRNBoost2_degrees:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+      results/Cuomo/networks/GRNBoost2
+      results/Cuomo/degrees/GRNBoost2
+      logs/Cuomo/degrees/GRNBoost2
+      .degrees.csv
+      Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_grnboost2_network.function.R
+    deps:
+    - results/Cuomo/networks/GRNBoost2
+    - results/tooling/R-multitool.specification
+    - src/analysis/foreach_network.sh
+    - src/analysis/calculate_node_degrees.R
+    - src/analysis/load_grnboost2_network.function.R
+    outs:
+    - results/Cuomo/degrees/GRNBoost2

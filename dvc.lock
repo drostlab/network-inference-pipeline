@@ -145,7 +145,7 @@ plot_Yang_NetworkInferenceJl_MI:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Yang/networks/NetworkInference.jl/MI results/Yang/plots/NetworkInference.jl/MI
     logs/Yang/plots/NetworkInference.jl/MI Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Yang/networks/NetworkInference.jl/MI
@@ -155,12 +155,12 @@ plot_Yang_NetworkInferenceJl_MI:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Yang_variants.csv
     md5: 383b37022aac3cbd28776836fdf8f611
     size: 239
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -169,8 +169,8 @@ plot_Yang_NetworkInferenceJl_MI:
     size: 1334
   outs:
   - path: results/Yang/plots/NetworkInference.jl/MI
-    md5: f747b8698cc23c19329e50f169190b04.dir
-    size: 245708254
+    md5: 912932cb951f5b3f6417ac0ee59e936a.dir
+    size: 245670868
     nfiles: 75
 infer_Yang_NetworkInferenceJl_CLR:
   cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
@@ -312,7 +312,7 @@ plot_Cuomo_GRNBoost2:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Cuomo/networks/GRNBoost2 results/Cuomo/plots/GRNBoost2 logs/Cuomo/plots/GRNBoost2
     Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv
-    src/plotting/load_grnboost2_network.function.R png
+    src/analysis/load_grnboost2_network.function.R png
   deps:
   - path: results/Cuomo/networks/GRNBoost2
     md5: 01b3d1a245c0bd7ecef79f0e173668bf.dir
@@ -321,12 +321,12 @@ plot_Cuomo_GRNBoost2:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_grnboost2_network.function.R
+    md5: 74f8b4b818ad944073f6f7af210b5e7a
+    size: 404
   - path: src/plotting/Cuomo_variants.csv
     md5: 36c6e15d926106c0650bba7aad97c433
     size: 245
-  - path: src/plotting/load_grnboost2_network.function.R
-    md5: 74f8b4b818ad944073f6f7af210b5e7a
-    size: 404
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -335,14 +335,14 @@ plot_Cuomo_GRNBoost2:
     size: 1334
   outs:
   - path: results/Cuomo/plots/GRNBoost2
-    md5: 0e6c3fcaf9c4a27355f174b011642f5d.dir
-    size: 81323951
+    md5: 0f310a824e7affc58aba506a530e5f8d.dir
+    size: 81336265
     nfiles: 45
 plot_Yang_NetworkInferenceJl_CLR:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Yang/networks/NetworkInference.jl/CLR results/Yang/plots/NetworkInference.jl/CLR
     logs/Yang/plots/NetworkInference.jl/CLR Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Yang/networks/NetworkInference.jl/CLR
@@ -352,12 +352,12 @@ plot_Yang_NetworkInferenceJl_CLR:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Yang_variants.csv
     md5: 383b37022aac3cbd28776836fdf8f611
     size: 239
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -366,14 +366,14 @@ plot_Yang_NetworkInferenceJl_CLR:
     size: 1334
   outs:
   - path: results/Yang/plots/NetworkInference.jl/CLR
-    md5: e5666d06204011baeed8c713047639f2.dir
-    size: 275497069
+    md5: 1646f57fab3538cd58523f1eaa227bf4.dir
+    size: 275506592
     nfiles: 75
 plot_Yang_GRNBoost2:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Yang/networks/GRNBoost2 results/Yang/plots/GRNBoost2 logs/Yang/plots/GRNBoost2
     Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv
-    src/plotting/load_grnboost2_network.function.R png
+    src/analysis/load_grnboost2_network.function.R png
   deps:
   - path: results/Yang/networks/GRNBoost2
     md5: a452c8dc679c51c38f84a52668ae783b.dir
@@ -382,12 +382,12 @@ plot_Yang_GRNBoost2:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_grnboost2_network.function.R
+    md5: 74f8b4b818ad944073f6f7af210b5e7a
+    size: 404
   - path: src/plotting/Yang_variants.csv
     md5: 383b37022aac3cbd28776836fdf8f611
     size: 239
-  - path: src/plotting/load_grnboost2_network.function.R
-    md5: 74f8b4b818ad944073f6f7af210b5e7a
-    size: 404
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -396,14 +396,14 @@ plot_Yang_GRNBoost2:
     size: 1334
   outs:
   - path: results/Yang/plots/GRNBoost2
-    md5: 432bdd0e2677112bb7cc9688de8f4240.dir
-    size: 277586660
+    md5: 5279ffac6ae1ae946157d7d41455c50c.dir
+    size: 277568544
     nfiles: 75
 plot_Yang_GENIE3R:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Yang/networks/GENIE3-R results/Yang/plots/GENIE3-R logs/Yang/plots/GENIE3-R
     Rscript src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv
-    src/plotting/load_genie3r_network.function.R png
+    src/analysis/load_genie3r_network.function.R png
   deps:
   - path: results/Yang/networks/GENIE3-R
     md5: 0d7a020cbd5f181d85954c6429899702.dir
@@ -412,12 +412,12 @@ plot_Yang_GENIE3R:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_genie3r_network.function.R
+    md5: 1eb0578242a9668c7a719cd657466b1a
+    size: 64
   - path: src/plotting/Yang_variants.csv
     md5: 383b37022aac3cbd28776836fdf8f611
     size: 239
-  - path: src/plotting/load_genie3r_network.function.R
-    md5: 1eb0578242a9668c7a719cd657466b1a
-    size: 64
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -426,8 +426,8 @@ plot_Yang_GENIE3R:
     size: 1334
   outs:
   - path: results/Yang/plots/GENIE3-R
-    md5: c617c14f14c26ea5f99de9b17e473c63.dir
-    size: 394293347
+    md5: 6855e31c406eb50431714e37c0a21368.dir
+    size: 394307254
     nfiles: 75
 infer_Yang_NetworkInferenceJl_PIDC:
   cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
@@ -546,7 +546,7 @@ plot_Yang_NetworkInferenceJl_PUC:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Yang/networks/NetworkInference.jl/PUC results/Yang/plots/NetworkInference.jl/PUC
     logs/Yang/plots/NetworkInference.jl/PUC Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Yang/networks/NetworkInference.jl/PUC
@@ -556,12 +556,12 @@ plot_Yang_NetworkInferenceJl_PUC:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Yang_variants.csv
     md5: 383b37022aac3cbd28776836fdf8f611
     size: 239
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -570,8 +570,8 @@ plot_Yang_NetworkInferenceJl_PUC:
     size: 1334
   outs:
   - path: results/Yang/plots/NetworkInference.jl/PUC
-    md5: 4ab882615adb2d873c96c28c13c943ac.dir
-    size: 376659141
+    md5: de5e04ebf6d50a21b7d46685f16111b7.dir
+    size: 376684443
     nfiles: 75
 infer_Cuomo_NetworkInferenceJl_MI:
   cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
@@ -624,7 +624,7 @@ infer_Cuomo_NetworkInferenceJl_CLR:
 plot_Yang_LEAP:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Yang/networks/LEAP results/Yang/plots/LEAP logs/Yang/plots/LEAP Rscript
-    src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/plotting/load_leap_network.function.R
+    src/plotting/plot_for_network_variants.R src/plotting/Yang_variants.csv src/analysis/load_leap_network.function.R
     png
   deps:
   - path: results/Yang/networks/LEAP
@@ -634,12 +634,12 @@ plot_Yang_LEAP:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_leap_network.function.R
+    md5: 3a4deadcf36f7b44c533a641bf06d38c
+    size: 410
   - path: src/plotting/Yang_variants.csv
     md5: 383b37022aac3cbd28776836fdf8f611
     size: 239
-  - path: src/plotting/load_leap_network.function.R
-    md5: 3a4deadcf36f7b44c533a641bf06d38c
-    size: 410
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -648,14 +648,14 @@ plot_Yang_LEAP:
     size: 1334
   outs:
   - path: results/Yang/plots/LEAP
-    md5: b3bfa0f6cd20cc55d0762f662a75881a.dir
-    size: 708754823
+    md5: 2fec2623dd9244938c39c24850ef2a66.dir
+    size: 708645105
     nfiles: 75
 plot_Cuomo_NetworkInferenceJl_MI:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Cuomo/networks/NetworkInference.jl/MI results/Cuomo/plots/NetworkInference.jl/MI
     logs/Cuomo/plots/NetworkInference.jl/MI Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Cuomo/networks/NetworkInference.jl/MI
@@ -665,12 +665,12 @@ plot_Cuomo_NetworkInferenceJl_MI:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Cuomo_variants.csv
     md5: 36c6e15d926106c0650bba7aad97c433
     size: 245
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -679,14 +679,14 @@ plot_Cuomo_NetworkInferenceJl_MI:
     size: 1334
   outs:
   - path: results/Cuomo/plots/NetworkInference.jl/MI
-    md5: be424eef09f0cb54c22d50ba9144a5f2.dir
-    size: 122548783
+    md5: 7a4412f8d0bd301eb922fd60ea1639a9.dir
+    size: 122542437
     nfiles: 45
 plot_Yang_NetworkInferenceJl_PIDC:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Yang/networks/NetworkInference.jl/PIDC results/Yang/plots/NetworkInference.jl/PIDC
     logs/Yang/plots/NetworkInference.jl/PIDC Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Yang_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Yang/networks/NetworkInference.jl/PIDC
@@ -696,12 +696,12 @@ plot_Yang_NetworkInferenceJl_PIDC:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Yang_variants.csv
     md5: 383b37022aac3cbd28776836fdf8f611
     size: 239
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -710,14 +710,14 @@ plot_Yang_NetworkInferenceJl_PIDC:
     size: 1334
   outs:
   - path: results/Yang/plots/NetworkInference.jl/PIDC
-    md5: 8f8c17b8908b94cd0c4995755dc99983.dir
-    size: 347508580
+    md5: ef0bff832b50e4f2f283c9a412d182b1.dir
+    size: 347583506
     nfiles: 75
 plot_Cuomo_NetworkInferenceJl_CLR:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Cuomo/networks/NetworkInference.jl/CLR results/Cuomo/plots/NetworkInference.jl/CLR
     logs/Cuomo/plots/NetworkInference.jl/CLR Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Cuomo/networks/NetworkInference.jl/CLR
@@ -727,12 +727,12 @@ plot_Cuomo_NetworkInferenceJl_CLR:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Cuomo_variants.csv
     md5: 36c6e15d926106c0650bba7aad97c433
     size: 245
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -741,8 +741,8 @@ plot_Cuomo_NetworkInferenceJl_CLR:
     size: 1334
   outs:
   - path: results/Cuomo/plots/NetworkInference.jl/CLR
-    md5: 8b3dd31a8d7e55a0cff69c3c5955c3f4.dir
-    size: 95362759
+    md5: fad94c747617d6c1e267b20008ef8243.dir
+    size: 95377264
     nfiles: 45
 infer_Cuomo_NetworkInferenceJl_PUC:
   cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
@@ -796,7 +796,7 @@ plot_Cuomo_NetworkInferenceJl_PUC:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Cuomo/networks/NetworkInference.jl/PUC results/Cuomo/plots/NetworkInference.jl/PUC
     logs/Cuomo/plots/NetworkInference.jl/PUC Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Cuomo/networks/NetworkInference.jl/PUC
@@ -806,12 +806,12 @@ plot_Cuomo_NetworkInferenceJl_PUC:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Cuomo_variants.csv
     md5: 36c6e15d926106c0650bba7aad97c433
     size: 245
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -820,8 +820,8 @@ plot_Cuomo_NetworkInferenceJl_PUC:
     size: 1334
   outs:
   - path: results/Cuomo/plots/NetworkInference.jl/PUC
-    md5: 43e4c02c59a26422def98aeaa7757ea9.dir
-    size: 150278856
+    md5: b9c41e5f9808e74024cccb7aba2a60fd.dir
+    size: 150299709
     nfiles: 45
 infer_Cuomo_NetworkInferenceJl_PIDC:
   cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
@@ -851,7 +851,7 @@ plot_Cuomo_NetworkInferenceJl_PIDC:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Cuomo/networks/NetworkInference.jl/PIDC results/Cuomo/plots/NetworkInference.jl/PIDC
     logs/Cuomo/plots/NetworkInference.jl/PIDC Rscript src/plotting/plot_for_network_variants.R
-    src/plotting/Cuomo_variants.csv src/plotting/load_network_inference_jl_network.function.R
+    src/plotting/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R
     png
   deps:
   - path: results/Cuomo/networks/NetworkInference.jl/PIDC
@@ -861,12 +861,12 @@ plot_Cuomo_NetworkInferenceJl_PIDC:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
   - path: src/plotting/Cuomo_variants.csv
     md5: 36c6e15d926106c0650bba7aad97c433
     size: 245
-  - path: src/plotting/load_network_inference_jl_network.function.R
-    md5: 680649f2a2d86d406e0e96713e296e98
-    size: 492
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -875,14 +875,14 @@ plot_Cuomo_NetworkInferenceJl_PIDC:
     size: 1334
   outs:
   - path: results/Cuomo/plots/NetworkInference.jl/PIDC
-    md5: caf3da9249e2a9a27a74616c53b9b420.dir
-    size: 164476893
+    md5: ad4b93ed675381d81d0b6e0b3fe0ae59.dir
+    size: 164395295
     nfiles: 45
 plot_Cuomo_GENIE3R:
   cmd: singularity exec toolbox/bin/R-multitool.sif sh src/plotting/plot_foreach_slice.sh
     results/Cuomo/networks/GENIE3-R results/Cuomo/plots/GENIE3-R logs/Cuomo/plots/GENIE3-R
     Rscript src/plotting/plot_for_network_variants.R src/plotting/Cuomo_variants.csv
-    src/plotting/load_genie3r_network.function.R png
+    src/analysis/load_genie3r_network.function.R png
   deps:
   - path: results/Cuomo/networks/GENIE3-R
     md5: 5af4d37ec71dec0e99f1c5136f35273f.dir
@@ -891,12 +891,12 @@ plot_Cuomo_GENIE3R:
   - path: results/tooling/R-multitool.specification
     md5: c571f2f296a3e8d4e81d40d7688d94d4
     size: 503
+  - path: src/analysis/load_genie3r_network.function.R
+    md5: 1eb0578242a9668c7a719cd657466b1a
+    size: 64
   - path: src/plotting/Cuomo_variants.csv
     md5: 36c6e15d926106c0650bba7aad97c433
     size: 245
-  - path: src/plotting/load_genie3r_network.function.R
-    md5: 1eb0578242a9668c7a719cd657466b1a
-    size: 64
   - path: src/plotting/plot_for_network_variants.R
     md5: 2f266391b2eedc22538defd97e5364aa
     size: 6052
@@ -905,6 +905,352 @@ plot_Cuomo_GENIE3R:
     size: 1334
   outs:
   - path: results/Cuomo/plots/GENIE3-R
-    md5: ac6a58876f8ef2adae9d8c44ec802dfb.dir
-    size: 92853763
+    md5: 61b153bd950209005c7164dcc44b75e0.dir
+    size: 92883290
     nfiles: 45
+calculate_Yang_NetworkInferenceJl_PUC_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Yang/networks/NetworkInference.jl/PUC results/Yang/degrees/NetworkInference.jl/PUC
+    logs/Yang/degrees/NetworkInference.jl/PUC .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Yang/networks/NetworkInference.jl/PUC
+    md5: 4a30a265fa1d5e1201676e4d327ac20e.dir
+    size: 241287372
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Yang/degrees/NetworkInference.jl/PUC
+    md5: db561713a482347e0b67f402a9eac89b.dir
+    size: 163740
+    nfiles: 20
+calculate_Yang_NetworkInferenceJl_PIDC_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Yang/networks/NetworkInference.jl/PIDC results/Yang/degrees/NetworkInference.jl/PIDC
+    logs/Yang/degrees/NetworkInference.jl/PIDC .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Yang/networks/NetworkInference.jl/PIDC
+    md5: 2ce6d635f650da5b64404e09fa2dbc04.dir
+    size: 237285580
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Yang/degrees/NetworkInference.jl/PIDC
+    md5: 62da1195e557b88a722c4dd940998f98.dir
+    size: 163740
+    nfiles: 20
+calculate_Yang_GRNBoost2_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Yang/networks/GRNBoost2 results/Yang/degrees/GRNBoost2 logs/Yang/degrees/GRNBoost2
+    .degrees.csv Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_grnboost2_network.function.R
+  deps:
+  - path: results/Yang/networks/GRNBoost2
+    md5: a452c8dc679c51c38f84a52668ae783b.dir
+    size: 248170094
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_grnboost2_network.function.R
+    md5: 74f8b4b818ad944073f6f7af210b5e7a
+    size: 404
+  outs:
+  - path: results/Yang/degrees/GRNBoost2
+    md5: a33a4d3479505fc72a74c46520d4c392.dir
+    size: 167299
+    nfiles: 20
+calculate_Cuomo_NetworkInferenceJl_CLR_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Cuomo/networks/NetworkInference.jl/CLR results/Cuomo/degrees/NetworkInference.jl/CLR
+    logs/Cuomo/degrees/NetworkInference.jl/CLR .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Cuomo/networks/NetworkInference.jl/CLR
+    md5: 03a98d5a4e4e277b8bcb84e429fd1817.dir
+    size: 14534122
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Cuomo/degrees/NetworkInference.jl/CLR
+    md5: 97d6c424a725b9e0aba62fcbb14cf3b4.dir
+    size: 34105
+    nfiles: 12
+calculate_Cuomo_NetworkInferenceJl_MI_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Cuomo/networks/NetworkInference.jl/MI results/Cuomo/degrees/NetworkInference.jl/MI
+    logs/Cuomo/degrees/NetworkInference.jl/MI .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Cuomo/networks/NetworkInference.jl/MI
+    md5: 79a02bdd911ac45a34a9cb5d5c809e16.dir
+    size: 16866328
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Cuomo/degrees/NetworkInference.jl/MI
+    md5: cf3d652ea3c836577077e5b008fd569f.dir
+    size: 34078
+    nfiles: 12
+calculate_Yang_LEAP_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Yang/networks/LEAP results/Yang/degrees/LEAP logs/Yang/degrees/LEAP .degrees.csv
+    Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_leap_network.function.R
+  deps:
+  - path: results/Yang/networks/LEAP
+    md5: a7ceecd5b257d14c53804e0988050cb4.dir
+    size: 291831960
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_leap_network.function.R
+    md5: 3a4deadcf36f7b44c533a641bf06d38c
+    size: 410
+  outs:
+  - path: results/Yang/degrees/LEAP
+    md5: eb9615362e9ffc4728c88a64959650aa.dir
+    size: 167004
+    nfiles: 20
+calculate_Cuomo_NetworkInferenceJl_PUC_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Cuomo/networks/NetworkInference.jl/PUC results/Cuomo/degrees/NetworkInference.jl/PUC
+    logs/Cuomo/degrees/NetworkInference.jl/PUC .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Cuomo/networks/NetworkInference.jl/PUC
+    md5: 8f98b3c377f4a0b22e76970134607eeb.dir
+    size: 16346036
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Cuomo/degrees/NetworkInference.jl/PUC
+    md5: a1f35ac9098135dde610e8e9c7e54275.dir
+    size: 34208
+    nfiles: 12
+calculate_Cuomo_GRNBoost2_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Cuomo/networks/GRNBoost2 results/Cuomo/degrees/GRNBoost2 logs/Cuomo/degrees/GRNBoost2
+    .degrees.csv Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_grnboost2_network.function.R
+  deps:
+  - path: results/Cuomo/networks/GRNBoost2
+    md5: 01b3d1a245c0bd7ecef79f0e173668bf.dir
+    size: 15531534
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_grnboost2_network.function.R
+    md5: 74f8b4b818ad944073f6f7af210b5e7a
+    size: 404
+  outs:
+  - path: results/Cuomo/degrees/GRNBoost2
+    md5: 2ed929c2d42e3826d14fc20ef8dd812c.dir
+    size: 34243
+    nfiles: 12
+calculate_Yang_GENIE3R_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Yang/networks/GENIE3-R results/Yang/degrees/GENIE3-R logs/Yang/degrees/GENIE3-R
+    .degrees.csv Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_genie3r_network.function.R
+  deps:
+  - path: results/Yang/networks/GENIE3-R
+    md5: 0d7a020cbd5f181d85954c6429899702.dir
+    size: 100126815
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_genie3r_network.function.R
+    md5: 1eb0578242a9668c7a719cd657466b1a
+    size: 64
+  outs:
+  - path: results/Yang/degrees/GENIE3-R
+    md5: 65bfbfdb350bb35a99fe6817298aae33.dir
+    size: 167306
+    nfiles: 20
+calculate_Cuomo_GENIE3R_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Cuomo/networks/GENIE3-R results/Cuomo/degrees/GENIE3-R logs/Cuomo/degrees/GENIE3-R
+    .degrees.csv Rscript src/analysis/calculate_node_degrees.R median src/analysis/load_genie3r_network.function.R
+  deps:
+  - path: results/Cuomo/networks/GENIE3-R
+    md5: 5af4d37ec71dec0e99f1c5136f35273f.dir
+    size: 6477331
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_genie3r_network.function.R
+    md5: 1eb0578242a9668c7a719cd657466b1a
+    size: 64
+  outs:
+  - path: results/Cuomo/degrees/GENIE3-R
+    md5: 09cd9b69e00ff953af6a54b909feffec.dir
+    size: 34328
+    nfiles: 12
+calculate_Yang_NetworkInferenceJl_CLR_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Yang/networks/NetworkInference.jl/CLR results/Yang/degrees/NetworkInference.jl/CLR
+    logs/Yang/degrees/NetworkInference.jl/CLR .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Yang/networks/NetworkInference.jl/CLR
+    md5: 0b45233a3c6725a90e0b13e2da240b3b.dir
+    size: 227859490
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Yang/degrees/NetworkInference.jl/CLR
+    md5: f4dce50c5ea9f2db3847cdd93194d7fb.dir
+    size: 163495
+    nfiles: 20
+calculate_Yang_NetworkInferenceJl_MI_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Yang/networks/NetworkInference.jl/MI results/Yang/degrees/NetworkInference.jl/MI
+    logs/Yang/degrees/NetworkInference.jl/MI .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Yang/networks/NetworkInference.jl/MI
+    md5: b0ec07935dd0e98b9d97ad264b05a25d.dir
+    size: 245381428
+    nfiles: 20
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Yang/degrees/NetworkInference.jl/MI
+    md5: d20756e8a0fca8c58bb435ee2395801b.dir
+    size: 163740
+    nfiles: 20
+calculate_Cuomo_NetworkInferenceJl_PIDC_degrees:
+  cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/foreach_network.sh
+    results/Cuomo/networks/NetworkInference.jl/PIDC results/Cuomo/degrees/NetworkInference.jl/PIDC
+    logs/Cuomo/degrees/NetworkInference.jl/PIDC .degrees.csv Rscript src/analysis/calculate_node_degrees.R
+    median src/analysis/load_network_inference_jl_network.function.R
+  deps:
+  - path: results/Cuomo/networks/NetworkInference.jl/PIDC
+    md5: e37510165472d3fc4c45a30b78538b82.dir
+    size: 16526156
+    nfiles: 12
+  - path: results/tooling/R-multitool.specification
+    md5: c571f2f296a3e8d4e81d40d7688d94d4
+    size: 503
+  - path: src/analysis/calculate_node_degrees.R
+    md5: ac5f6e23bae99701b13422295d9a7940
+    size: 577
+  - path: src/analysis/foreach_network.sh
+    md5: bb825270c3aac85f01606aa10e1d540a
+    size: 1194
+  - path: src/analysis/load_network_inference_jl_network.function.R
+    md5: 680649f2a2d86d406e0e96713e296e98
+    size: 492
+  outs:
+  - path: results/Cuomo/degrees/NetworkInference.jl/PIDC
+    md5: 2620c23fe8f2c3b910e294a207efe3d6.dir
+    size: 34317
+    nfiles: 12
