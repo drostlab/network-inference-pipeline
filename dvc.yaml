@@ -29,8 +29,10 @@ stages:
     - results/tooling/R-multitool.specification
   acquire_data:
     cmd: mkdir -p results &&
+      singularity exec toolbox/bin/utilities.sif
       wget -O results/raw-inputs.zip https://ndownloader.figshare.com/files/26052149
     deps:
+      - results/tooling/utilities.specification
       - https://ndownloader.figshare.com/files/26052149
     outs:
       - results/raw-inputs.zip
