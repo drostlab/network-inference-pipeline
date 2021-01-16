@@ -184,7 +184,9 @@ for (name in rownames(variants)) {
     )
   )
 
-  rescaled <- edgynode::network_rescale(input)
+  rescaled <- edgynode::network_rescale(
+    edgynode::network_make_symmetric(input)
+  )
 
   save_individual_plots(variant, rescaled)
   assign(name, rescaled)
@@ -226,4 +228,18 @@ save_plot(
   ),
   height = 8,
   width = 10
+)
+
+save_plot(
+  "node_degree_comparison",
+  edgynode::plot_network_degree_distribution_naive_comparison(
+    adj_mat_not_filtered_not_normalized = raw_network,
+    adj_mat_filtered_and_not_normalized = filtered_network,
+    adj_mat_not_filtered_but_normalized = normalized_network,
+    adj_mat_filtered_and_normalized = filtered_normalized_network,
+    threshold = "median",
+    print_message = TRUE
+  ),
+  height = 8,
+  width = gene_count / 5
 )

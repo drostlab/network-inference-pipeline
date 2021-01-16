@@ -7,7 +7,7 @@ output_path <- arguments[4]
 degrees <- edgynode::network_statistics_degree_distribution_naive(
   edgynode::network_make_binary(
     edgynode::network_rescale(
-      edgynode:::make_symmetric(
+      edgynode::network_make_symmetric(
         eval(parse(input_adaptor))(input_path)
       )
     ),
