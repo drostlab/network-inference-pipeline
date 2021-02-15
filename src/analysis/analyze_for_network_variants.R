@@ -30,7 +30,7 @@ save_plot <- function(name, plot, width = 10, height = 10) {
   )
 }
 
-save_individual_plots <- function(variant, network) {
+handle_single_network <- function(variant, network) {
   gene_order <- rownames(network)[order(apply(network, 1, median))]
   if(length(gene_order) > 500) {
     gene_order <- gene_order[1:min(length(gene_order), 500)]
@@ -38,12 +38,24 @@ save_individual_plots <- function(variant, network) {
   }
   network <- network[gene_order, gene_order]
 
+  degrees <- edgynode::network_statistics_degree_distribution_naive(
+    edgynode::network_make_binary(network, threshold = "median")
+  )
+  write.csv(
+    degrees[order(degrees$node_degree, decreasing = TRUE), ],
+    row.names = FALSE,
+    quote = FALSE,
+    file = paste0(
+      output_directory,
+      "/",
+      output_filename_template,
+      ".degrees.csv"
+    )
+  )
   save_plot(
     name = paste0("degree_distribution_naive_", variant),
     plot = edgynode::plot_network_degree_distribution_naive(
-      edgynode::network_statistics_degree_distribution_naive(
-        edgynode::network_make_binary(network, threshold = "median")
-      ),
+      degrees,
       y_ticks = 20
     ),
     height = 16,
@@ -188,7 +200,7 @@ for (name in rownames(variants)) {
     edgynode::network_make_symmetric(input)
   )
 
-  save_individual_plots(variant, rescaled)
+  handle_single_network(variant, rescaled)
   assign(name, rescaled)
 }
 
@@ -211,18 +223,30 @@ save_plot(
   width = gene_count / 10
 )
 
+
+benchmark <- edgynode::network_benchmark_noise_filtering(
+  adj_mat_not_filtered_not_normalized = raw_network,
+  adj_mat_filtered_and_not_normalized = filtered_network,
+  adj_mat_not_filtered_but_normalized = normalized_network,
+  adj_mat_filtered_and_normalized = filtered_normalized_network,
+  threshold = "median",
+  dist_type = "hamming",
+  print_message = TRUE
+)
+
+write(
+  edgynode::network_benchmark_noise_filtering_kruskal_test(benchmark)$p.val,
+  file = paste0(
+    output_directory,
+    "/",
+    output_filename_template,
+    ".pvalue"
+  )
+)
 save_plot(
   "benchmark",
   edgynode::plot_network_benchmark_noise_filtering(
-    edgynode::network_benchmark_noise_filtering(
-      adj_mat_not_filtered_not_normalized = raw_network,
-      adj_mat_filtered_and_not_normalized = filtered_network,
-      adj_mat_not_filtered_but_normalized = normalized_network,
-      adj_mat_filtered_and_normalized = filtered_normalized_network,
-      threshold = "median",
-      dist_type = "hamming",
-      print_message = TRUE
-    ),
+    benchmark,
     dist_type = "hamming",
     title = ""
   ),
