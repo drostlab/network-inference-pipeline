@@ -4,7 +4,7 @@ stages:
       singularity run --app manifest toolbox/bin/utilities.sif
         >results/tooling/utilities.manifest &&
       singularity run --app specification toolbox/bin/utilities.sif
-        70310219cb0824576236ab01372579cfc487be5aa2f3d261aff6025083236235
+        9ec8df2a1ad7633ed0893527ca1c8c4f56426ab868a0adccea366a9fbf799898
         >results/tooling/utilities.specification
     deps:
     - toolbox/bin/utilities.sif
@@ -16,7 +16,7 @@ stages:
       singularity run --app manifest toolbox/bin/arboreto.sif
         >results/tooling/arboreto.manifest &&
       singularity run --app specification toolbox/bin/arboreto.sif
-        7e6a83af13e12d56f6cad1c2790a4ec53157e89d90d3d5d2fd3100c5f083b5c7
+        540b9a053e4d862bfab972735d1d62af04485c186cf5735e98748ef5b5f8b27f
         >results/tooling/arboreto.specification
     deps:
     - toolbox/bin/arboreto.sif
@@ -28,7 +28,7 @@ stages:
       singularity run --app manifest toolbox/bin/NetworkInference.jl.sif
         >results/tooling/NetworkInference.jl.manifest &&
       singularity run --app specification toolbox/bin/NetworkInference.jl.sif
-        3d42fd2e9ebcbe6c4be3db35107a9277c71f39565d9e377f4d9584593c0cc712
+        3e491ce8057710cc2f0cf020b178f6315889e1b19357716b5f0da301475f9098
         >results/tooling/NetworkInference.jl.specification
     deps:
     - toolbox/bin/NetworkInference.jl.sif
@@ -40,7 +40,7 @@ stages:
       singularity run --app manifest toolbox/bin/R-multitool.sif
         >results/tooling/R-multitool.manifest &&
       singularity run --app specification toolbox/bin/R-multitool.sif
-        cff1fee07142a3e7dab49c7bb30d2c71c9a80f175eefb6684378d69ebf06e333
+        833dd472e43502e21e380f6d3df4a19abcbb21bab41d578f7b171e201dfef258
         >results/tooling/R-multitool.specification
     deps:
     - toolbox/bin/R-multitool.sif
@@ -501,3 +501,28 @@ stages:
     - src/analysis/load_grnboost2_network.function.R
     outs:
     - results/Cuomo/analysis/GRNBoost2
+  noisyR_paper_materials:
+    cmd:
+      singularity exec toolbox/bin/utilities.sif
+      tar czvf noisyR-paper-materials-$(singularity exec toolbox/bin/utilities.sif git describe --always --dirty --tags).tar.gz
+      results/Yang/analysis/GENIE3-R
+      results/Yang/analysis/NetworkInference.jl/PIDC
+      results/Yang/analysis/LEAP
+      results/Yang/networks/GENIE3-R
+      results/Yang/networks/NetworkInference.jl/PIDC
+      results/Yang/networks/LEAP
+      results/Cuomo/analysis/GENIE3-R
+      results/Cuomo/analysis/NetworkInference.jl/PIDC
+      results/Cuomo/networks/GENIE3-R
+      results/Cuomo/networks/NetworkInference.jl/PIDC
+    deps:
+    - results/Yang/analysis/GENIE3-R
+    - results/Yang/analysis/NetworkInference.jl/PIDC
+    - results/Yang/analysis/LEAP
+    - results/Yang/networks/GENIE3-R
+    - results/Yang/networks/NetworkInference.jl/PIDC
+    - results/Yang/networks/LEAP
+    - results/Cuomo/analysis/GENIE3-R
+    - results/Cuomo/analysis/NetworkInference.jl/PIDC
+    - results/Cuomo/networks/GENIE3-R
+    - results/Cuomo/networks/NetworkInference.jl/PIDC

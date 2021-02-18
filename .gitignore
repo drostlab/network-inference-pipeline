@@ -1,2 +1,3 @@
-results
-logs
+/results
+/logs
+*.tar.gz
