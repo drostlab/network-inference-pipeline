@@ -35,8 +35,6 @@ git submodule init
 git submodule update
 ----
 
-NOTE: While the Network Inference Toolbox repository is still private, you will need to reconfigure the origin URL in between these two commands: `git submodule init` creates a configuration entry `submodule.toolbox.url` that needs to be set to a URL that can be used to access the repository. E.g., run `git config submodule.toolbox.url git@github.com:drostlab/network-inference-pipeline.git`. You can then proceed with `git submodule update`.
-
 After setting up the submodule, you can build the containers by entering the `toolbox` directory and then running `make` (or, if the containers were already built somewhere else, just copy them to `toolbox/bin`).
 
 The only parts of the Network Inference Toolbox that are strictly necessary to run the pipeline are the assembled Singularity containers (i.e. `.sif` files), which the pipeline expects to find in `toolbox/bin`. If you are sure you just want to _run_ the pipeline (and not change it), you alternatively could copy the containers there, or symlink `toolbox/bin` to another location where the containers are available, without setting up the submodule as described above.
