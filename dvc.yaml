@@ -40,7 +40,7 @@ stages:
       singularity run --app manifest toolbox/bin/R-multitool.sif
         >results/tooling/R-multitool.manifest &&
       singularity run --app specification toolbox/bin/R-multitool.sif
-        833dd472e43502e21e380f6d3df4a19abcbb21bab41d578f7b171e201dfef258
+        0cbf300aef74dfeae556a5bf41d0593c9c6d1bd6e49eeef5d4eac865664ecf33
         >results/tooling/R-multitool.specification
     deps:
     - toolbox/bin/R-multitool.sif
