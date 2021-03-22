@@ -9,10 +9,8 @@ SINK="$(pwd)/$2"
 cd "$SOURCE"
 mkdir -p "$SINK"
 
-for f in counts_*.csv; do
-  # Rename the first cell to `"gene"` and normalize inputs
-  cat $f | sed 's/^""/"gene"/' | xsv input >"$SINK/$f"
-done
+# Rename the first cell to `"gene"` and normalize inputs
+cat counts_raw.csv | sed 's/^""/"gene"/' | xsv input >"$SINK/counts_raw.csv"
 
 for f in genes_*.csv; do
   # Insert a (single-column) header and normalize inputs

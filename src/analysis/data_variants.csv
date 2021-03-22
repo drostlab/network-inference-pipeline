@@ -1,0 +1,5 @@
+name,VARIANT,label
+raw_network,raw,not filtered / not normalized
+normalized_network,normalized,not filtered / normalized
+filtered_network,filtered,filtered / not normalized
+filtered_normalized_network,filtered_normalized,filtered / normalized
