@@ -96,22 +96,50 @@ stages:
     - src/clean_Cuomo.sh
     outs:
     - results/Cuomo/clean
+  denoise_Yang_data:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/denoise.sh
+      results/Yang/clean
+      counts_raw.csv
+      results/Yang/denoised
+      logs/Yang/denoised
+    deps:
+      - results/Yang/clean
+      - results/tooling/R-multitool.specification
+      - src/denoise.sh
+      - src/denoise.R
+    outs:
+      - results/Yang/denoised
+  denoise_Cuomo_data:
+    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/denoise.sh
+      results/Cuomo/clean
+      counts_raw_day2.csv
+      results/Cuomo/denoised
+      logs/Cuomo/denoised
+    deps:
+      - results/Cuomo/clean
+      - results/tooling/R-multitool.specification
+      - src/denoise.sh
+      - src/denoise.R
+    outs:
+      - results/Cuomo/denoised
   slice_Yang_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
-      results/Yang/clean
+      results/Yang/denoised
       results/Yang/sliced
     deps:
-    - results/Yang/clean
+    - results/Yang/denoised
     - results/tooling/utilities.specification
     - src/slice.sh
     outs:
     - results/Yang/sliced
   fuse_Yang_data:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/fuse_samples_foreach.sh
-      results/Yang/clean
+      results/Yang/denoised
+      results/Yang/clean/samples.csv
       results/Yang/fused
     deps:
     - results/Yang/clean
+    - results/Yang/denoised
     - results/tooling/R-multitool.specification
     - src/fuse_samples_foreach.sh
     - src/fuse_samples.R
@@ -129,10 +157,10 @@ stages:
     - results/Yang/sliced_fused
   slice_Cuomo_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
-      results/Cuomo/clean
+      results/Cuomo/denoised
       results/Cuomo/sliced
     deps:
-    - results/Cuomo/clean
+    - results/Cuomo/denoised
     - results/tooling/utilities.specification
     - src/slice.sh
     outs:
@@ -311,13 +339,13 @@ stages:
       results/Yang/networks/NetworkInference.jl/CLR
       results/Yang/analysis/NetworkInference.jl/CLR
       logs/Yang/plots/NetworkInference.jl/CLR
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/CLR
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Yang_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/analysis/NetworkInference.jl/CLR
@@ -326,13 +354,13 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/CLR
       results/Cuomo/analysis/NetworkInference.jl/CLR
       logs/Cuomo/plots/NetworkInference.jl/CLR
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/CLR
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Cuomo_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/analysis/NetworkInference.jl/CLR
@@ -341,13 +369,13 @@ stages:
       results/Yang/networks/NetworkInference.jl/MI
       results/Yang/analysis/NetworkInference.jl/MI
       logs/Yang/plots/NetworkInference.jl/MI
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/MI
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Yang_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/analysis/NetworkInference.jl/MI
@@ -356,13 +384,13 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/MI
       results/Cuomo/analysis/NetworkInference.jl/MI
       logs/Cuomo/plots/NetworkInference.jl/MI
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/MI
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Cuomo_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/analysis/NetworkInference.jl/MI
@@ -371,13 +399,13 @@ stages:
       results/Yang/networks/NetworkInference.jl/PIDC
       results/Yang/analysis/NetworkInference.jl/PIDC
       logs/Yang/plots/NetworkInference.jl/PIDC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/PIDC
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Yang_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/analysis/NetworkInference.jl/PIDC
@@ -386,13 +414,13 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/PIDC
       results/Cuomo/analysis/NetworkInference.jl/PIDC
       logs/Cuomo/plots/NetworkInference.jl/PIDC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/PIDC
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Cuomo_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/analysis/NetworkInference.jl/PIDC
@@ -401,13 +429,13 @@ stages:
       results/Yang/networks/NetworkInference.jl/PUC
       results/Yang/analysis/NetworkInference.jl/PUC
       logs/Yang/plots/NetworkInference.jl/PUC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Yang_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Yang/networks/NetworkInference.jl/PUC
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Yang_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Yang/analysis/NetworkInference.jl/PUC
@@ -416,13 +444,13 @@ stages:
       results/Cuomo/networks/NetworkInference.jl/PUC
       results/Cuomo/analysis/NetworkInference.jl/PUC
       logs/Cuomo/plots/NetworkInference.jl/PUC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Cuomo_variants.csv src/analysis/load_network_inference_jl_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
     deps:
     - results/Cuomo/networks/NetworkInference.jl/PUC
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Cuomo_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_network_inference_jl_network.function.R
     outs:
     - results/Cuomo/analysis/NetworkInference.jl/PUC
@@ -431,13 +459,13 @@ stages:
       results/Yang/networks/GENIE3-R
       results/Yang/analysis/GENIE3-R
       logs/Yang/plots/GENIE3-R
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Yang_variants.csv src/analysis/load_genie3r_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_genie3r_network.function.R png
     deps:
     - results/Yang/networks/GENIE3-R
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Yang_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_genie3r_network.function.R
     outs:
     - results/Yang/analysis/GENIE3-R
@@ -446,13 +474,13 @@ stages:
       results/Cuomo/networks/GENIE3-R
       results/Cuomo/analysis/GENIE3-R
       logs/Cuomo/plots/GENIE3-R
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Cuomo_variants.csv src/analysis/load_genie3r_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_genie3r_network.function.R png
     deps:
     - results/Cuomo/networks/GENIE3-R
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Cuomo_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_genie3r_network.function.R
     outs:
     - results/Cuomo/analysis/GENIE3-R
@@ -461,13 +489,13 @@ stages:
       results/Yang/networks/LEAP
       results/Yang/analysis/LEAP
       logs/Yang/plots/LEAP
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Yang_variants.csv src/analysis/load_leap_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_leap_network.function.R png
     deps:
     - results/Yang/networks/LEAP
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Yang_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_leap_network.function.R
     outs:
     - results/Yang/analysis/LEAP
@@ -476,13 +504,13 @@ stages:
       results/Yang/networks/GRNBoost2
       results/Yang/analysis/GRNBoost2
       logs/Yang/plots/GRNBoost2
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Yang_variants.csv src/analysis/load_grnboost2_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_grnboost2_network.function.R png
     deps:
     - results/Yang/networks/GRNBoost2
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Yang_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_grnboost2_network.function.R
     outs:
     - results/Yang/analysis/GRNBoost2
@@ -491,13 +519,13 @@ stages:
       results/Cuomo/networks/GRNBoost2
       results/Cuomo/analysis/GRNBoost2
       logs/Cuomo/plots/GRNBoost2
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/Cuomo_variants.csv src/analysis/load_grnboost2_network.function.R png
+      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_grnboost2_network.function.R png
     deps:
     - results/Cuomo/networks/GRNBoost2
     - results/tooling/R-multitool.specification
     - src/analysis/analyze_foreach_slice.sh
     - src/analysis/analyze_for_network_variants.R
-    - src/analysis/Cuomo_variants.csv
+    - src/analysis/data_variants.csv
     - src/analysis/load_grnboost2_network.function.R
     outs:
     - results/Cuomo/analysis/GRNBoost2

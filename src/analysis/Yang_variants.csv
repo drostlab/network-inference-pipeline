@@ -1,5 +1,0 @@
-name,VARIANT,label
-raw_network,raw,not filtered / not normalized
-normalized_network,qnorm,not filtered / normalized
-filtered_network,noNoiseCM_raw,filtered / not normalized
-filtered_normalized_network,noNoiseCM_qnorm,filtered / normalized
