@@ -7,7 +7,7 @@ license = "GPL-3.0-or-later"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-dvc = "^1.11.9"
+dvc = "^2"
 
 [tool.poetry.dev-dependencies]
 
