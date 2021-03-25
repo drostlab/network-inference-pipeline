@@ -1,55 +1,37 @@
 stages:
-  inspect_utilities:
-    cmd: mkdir -p results/tooling &&
-      singularity run --app manifest toolbox/bin/utilities.sif
-        >results/tooling/utilities.manifest &&
-      singularity run --app specification toolbox/bin/utilities.sif
-        9ec8df2a1ad7633ed0893527ca1c8c4f56426ab868a0adccea366a9fbf799898
-        >results/tooling/utilities.specification
-    deps:
-    - toolbox/bin/utilities.sif
-    outs:
-    - results/tooling/utilities.specification
-    - results/tooling/utilities.manifest
-  inspect_arboreto:
-    cmd: mkdir -p results/tooling &&
-      singularity run --app manifest toolbox/bin/arboreto.sif
-        >results/tooling/arboreto.manifest &&
-      singularity run --app specification toolbox/bin/arboreto.sif
-        540b9a053e4d862bfab972735d1d62af04485c186cf5735e98748ef5b5f8b27f
-        >results/tooling/arboreto.specification
-    deps:
-    - toolbox/bin/arboreto.sif
-    outs:
-    - results/tooling/arboreto.specification
-    - results/tooling/arboreto.manifest
-  inspect_NetworkInferenceJl:
-    cmd: mkdir -p results/tooling &&
-      singularity run --app manifest toolbox/bin/NetworkInference.jl.sif
-        >results/tooling/NetworkInference.jl.manifest &&
-      singularity run --app specification toolbox/bin/NetworkInference.jl.sif
-        3e491ce8057710cc2f0cf020b178f6315889e1b19357716b5f0da301475f9098
-        >results/tooling/NetworkInference.jl.specification
-    deps:
-    - toolbox/bin/NetworkInference.jl.sif
-    outs:
-    - results/tooling/NetworkInference.jl.specification
-    - results/tooling/NetworkInference.jl.manifest
-  inspect_Rmultitool:
-    cmd: mkdir -p results/tooling &&
-      singularity run --app manifest toolbox/bin/R-multitool.sif
-        >results/tooling/R-multitool.manifest &&
-      singularity run --app specification toolbox/bin/R-multitool.sif
-        0cbf300aef74dfeae556a5bf41d0593c9c6d1bd6e49eeef5d4eac865664ecf33
-        >results/tooling/R-multitool.specification
-    deps:
-    - toolbox/bin/R-multitool.sif
-    outs:
-    - results/tooling/R-multitool.specification
-    - results/tooling/R-multitool.manifest
+
+  inspect_tools:
+    foreach:
+      utilities:
+        name: utilities
+        specification: 9ec8df2a1ad7633ed0893527ca1c8c4f56426ab868a0adccea366a9fbf799898
+      arboreto:
+        name: arboreto
+        specification: 540b9a053e4d862bfab972735d1d62af04485c186cf5735e98748ef5b5f8b27f
+      NetworkInferenceJl:
+        name: NetworkInference.jl
+        specification: 3e491ce8057710cc2f0cf020b178f6315889e1b19357716b5f0da301475f9098
+      Rmultitool:
+        name: R-multitool
+        specification: 0cbf300aef74dfeae556a5bf41d0593c9c6d1bd6e49eeef5d4eac865664ecf33
+    do:
+      cmd:
+      - mkdir -p results/tooling
+      - singularity run --app manifest toolbox/bin/${item.name}.sif
+        >results/tooling/${item.name}.manifest
+      - singularity run --app specification toolbox/bin/${item.name}.sif
+        ${item.specification}
+        >results/tooling/${item.name}.specification
+      deps:
+      - toolbox/bin/${item.name}.sif
+      outs:
+      - results/tooling/${item.name}.manifest
+      - results/tooling/${item.name}.specification
+
   acquire_data:
-    cmd: mkdir -p results &&
-      singularity exec toolbox/bin/utilities.sif
+    cmd:
+    - mkdir -p results
+    - singularity exec toolbox/bin/utilities.sif
       wget -O results/raw-inputs.zip https://ndownloader.figshare.com/files/26052149
     deps:
       - results/tooling/utilities.specification
@@ -60,497 +42,168 @@ stages:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/extract_data.sh
       results/raw-inputs.zip
       "noise_GRN_share/bulk_Yang/*"
-      results/Yang/raw
+      results/raw/Yang
     deps:
     - results/raw-inputs.zip
     - results/tooling/utilities.specification
     outs:
-    - results/Yang/raw
+    - results/raw/Yang
   extract_Cuomo_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/extract_data.sh
       results/raw-inputs.zip
       "noise_GRN_share/SC_Cuomo/*"
-      results/Cuomo/raw
+      results/raw/Cuomo
     deps:
     - results/raw-inputs.zip
     - results/tooling/utilities.specification
     outs:
-    - results/Cuomo/raw
+    - results/raw/Cuomo
   clean_Yang_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/clean_Yang.sh
-      results/Yang/raw
-      results/Yang/clean
+      results/raw/Yang
+      results/clean/Yang
     deps:
-    - results/Yang/raw
+    - results/raw/Yang
     - results/tooling/utilities.specification
     - src/clean_Yang.sh
     outs:
-    - results/Yang/clean
+    - results/clean/Yang
   clean_Cuomo_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/clean_Cuomo.sh
-      results/Cuomo/raw
-      results/Cuomo/clean
+      results/raw/Cuomo
+      results/clean/Cuomo
     deps:
-    - results/Cuomo/raw
+    - results/raw/Cuomo
     - results/tooling/utilities.specification
     - src/clean_Cuomo.sh
     outs:
-    - results/Cuomo/clean
+    - results/clean/Cuomo
   denoise_Yang_data:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/denoise.sh
-      results/Yang/clean
+      results/clean/Yang
       counts_raw.csv
-      results/Yang/denoised
-      logs/Yang/denoised
+      results/denoised/Yang
+      logs/denoised/Yang
     deps:
-      - results/Yang/clean
+      - results/clean/Yang
       - results/tooling/R-multitool.specification
       - src/denoise.sh
       - src/denoise.R
     outs:
-      - results/Yang/denoised
+      - results/denoised/Yang
   denoise_Cuomo_data:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/denoise.sh
-      results/Cuomo/clean
+      results/clean/Cuomo
       counts_raw_day2.csv
-      results/Cuomo/denoised
-      logs/Cuomo/denoised
+      results/denoised/Cuomo
+      logs/denoised/Cuomo
     deps:
-      - results/Cuomo/clean
+      - results/clean/Cuomo
       - results/tooling/R-multitool.specification
       - src/denoise.sh
       - src/denoise.R
     outs:
-      - results/Cuomo/denoised
+      - results/denoised/Cuomo
   slice_Yang_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
-      results/Yang/denoised
-      results/Yang/sliced
+      results/denoised/Yang
+      results/sliced/Yang
     deps:
-    - results/Yang/denoised
+    - results/denoised/Yang
     - results/tooling/utilities.specification
     - src/slice.sh
     outs:
-    - results/Yang/sliced
+    - results/sliced/Yang
   fuse_Yang_data:
     cmd: singularity exec toolbox/bin/R-multitool.sif sh src/fuse_samples_foreach.sh
-      results/Yang/denoised
-      results/Yang/clean/samples.csv
-      results/Yang/fused
+      results/denoised/Yang
+      results/clean/Yang/samples.csv
+      results/fused/Yang
     deps:
-    - results/Yang/clean
-    - results/Yang/denoised
+    - results/clean/Yang
+    - results/denoised/Yang
     - results/tooling/R-multitool.specification
     - src/fuse_samples_foreach.sh
     - src/fuse_samples.R
     outs:
-    - results/Yang/fused
+    - results/fused/Yang
   slice_Yang_fused_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
-      results/Yang/fused
-      results/Yang/sliced_fused
+      results/fused/Yang
+      results/sliced_fused/Yang
     deps:
-    - results/Yang/fused
+    - results/fused/Yang
     - results/tooling/utilities.specification
     - src/slice.sh
     outs:
-    - results/Yang/sliced_fused
+    - results/sliced_fused/Yang
   slice_Cuomo_data:
     cmd: singularity exec toolbox/bin/utilities.sif sh src/slice.sh
-      results/Cuomo/denoised
-      results/Cuomo/sliced
+      results/denoised/Cuomo
+      results/sliced/Cuomo
     deps:
-    - results/Cuomo/denoised
+    - results/denoised/Cuomo
     - results/tooling/utilities.specification
     - src/slice.sh
     outs:
-    - results/Cuomo/sliced
-  infer_Yang_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Yang/sliced
-      results/Yang/networks/NetworkInference.jl/CLR
-      logs/Yang/networks/NetworkInference.jl/CLR
-      julia src/inference/NetworkInference.jl/infer_network.jl CLR
-    deps:
-    - results/Yang/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Yang/networks/NetworkInference.jl/CLR
-  infer_Cuomo_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Cuomo/sliced
-      results/Cuomo/networks/NetworkInference.jl/CLR
-      logs/Cuomo/networks/NetworkInference.jl/CLR
-      julia src/inference/NetworkInference.jl/infer_network.jl CLR
-    deps:
-    - results/Cuomo/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Cuomo/networks/NetworkInference.jl/CLR
-  infer_Yang_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Yang/sliced
-      results/Yang/networks/NetworkInference.jl/MI
-      logs/Yang/networks/NetworkInference.jl/MI
-      julia src/inference/NetworkInference.jl/infer_network.jl MI
-    deps:
-    - results/Yang/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Yang/networks/NetworkInference.jl/MI
-  infer_Cuomo_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Cuomo/sliced
-      results/Cuomo/networks/NetworkInference.jl/MI
-      logs/Cuomo/networks/NetworkInference.jl/MI
-      julia src/inference/NetworkInference.jl/infer_network.jl MI
-    deps:
-    - results/Cuomo/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Cuomo/networks/NetworkInference.jl/MI
-  infer_Yang_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Yang/sliced
-      results/Yang/networks/NetworkInference.jl/PIDC
-      logs/Yang/networks/NetworkInference.jl/PIDC
-      julia src/inference/NetworkInference.jl/infer_network.jl PIDC
-    deps:
-    - results/Yang/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Yang/networks/NetworkInference.jl/PIDC
-  infer_Cuomo_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Cuomo/sliced
-      results/Cuomo/networks/NetworkInference.jl/PIDC
-      logs/Cuomo/networks/NetworkInference.jl/PIDC
-      julia src/inference/NetworkInference.jl/infer_network.jl PIDC
-    deps:
-    - results/Cuomo/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Cuomo/networks/NetworkInference.jl/PIDC
-  infer_Yang_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Yang/sliced
-      results/Yang/networks/NetworkInference.jl/PUC
-      logs/Yang/networks/NetworkInference.jl/PUC
-      julia src/inference/NetworkInference.jl/infer_network.jl PUC
-    deps:
-    - results/Yang/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Yang/networks/NetworkInference.jl/PUC
-  infer_Cuomo_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/NetworkInference.jl.sif sh src/inference/infer_foreach_slice.sh
-      results/Cuomo/sliced
-      results/Cuomo/networks/NetworkInference.jl/PUC
-      logs/Cuomo/networks/NetworkInference.jl/PUC
-      julia src/inference/NetworkInference.jl/infer_network.jl PUC
-    deps:
-    - results/Cuomo/sliced
-    - results/tooling/NetworkInference.jl.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/NetworkInference.jl
-    outs:
-    - results/Cuomo/networks/NetworkInference.jl/PUC
-  infer_Yang_GENIE3R:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/inference/infer_foreach_slice.sh
-      results/Yang/sliced
-      results/Yang/networks/GENIE3-R
-      logs/Yang/networks/GENIE3-R
-      Rscript src/inference/GENIE3-R/infer_network.R
-    deps:
-    - results/Yang/sliced
-    - results/tooling/R-multitool.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/GENIE3-R
-    outs:
-    - results/Yang/networks/GENIE3-R
-  infer_Cuomo_GENIE3R:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/inference/infer_foreach_slice.sh
-      results/Cuomo/sliced
-      results/Cuomo/networks/GENIE3-R
-      logs/Cuomo/networks/GENIE3-R
-      Rscript src/inference/GENIE3-R/infer_network.R
-    deps:
-    - results/Cuomo/sliced
-    - results/tooling/R-multitool.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/GENIE3-R
-    outs:
-    - results/Cuomo/networks/GENIE3-R
-  infer_Yang_LEAP:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/inference/infer_foreach_slice.sh
-      results/Yang/sliced_fused
-      results/Yang/networks/LEAP
-      logs/Yang/networks/LEAP
-      Rscript src/inference/LEAP/infer_network.R
-    deps:
-    - results/Yang/sliced_fused
-    - results/tooling/R-multitool.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/LEAP
-    outs:
-    - results/Yang/networks/LEAP
-  infer_Yang_GRNBoost2:
-    cmd: singularity exec toolbox/bin/arboreto.sif sh src/inference/infer_foreach_slice.sh
-      results/Yang/sliced
-      results/Yang/networks/GRNBoost2
-      logs/Yang/networks/GRNBoost2
-      python src/inference/GRNBoost2/infer_network.py
-    deps:
-    - results/Yang/sliced
-    - results/tooling/arboreto.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/GRNBoost2
-    outs:
-    - results/Yang/networks/GRNBoost2
-  infer_Cuomo_GRNBoost2:
-    cmd: singularity exec toolbox/bin/arboreto.sif sh src/inference/infer_foreach_slice.sh
-      results/Cuomo/sliced
-      results/Cuomo/networks/GRNBoost2
-      logs/Cuomo/networks/GRNBoost2
-      python src/inference/GRNBoost2/infer_network.py
-    deps:
-    - results/Cuomo/sliced
-    - results/tooling/arboreto.specification
-    - src/inference/infer_foreach_slice.sh
-    - src/inference/GRNBoost2
-    outs:
-    - results/Cuomo/networks/GRNBoost2
-  analyze_Yang_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Yang/networks/NetworkInference.jl/CLR
-      results/Yang/analysis/NetworkInference.jl/CLR
-      logs/Yang/plots/NetworkInference.jl/CLR
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Yang/networks/NetworkInference.jl/CLR
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Yang/analysis/NetworkInference.jl/CLR
-  analyze_Cuomo_NetworkInferenceJl_CLR:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Cuomo/networks/NetworkInference.jl/CLR
-      results/Cuomo/analysis/NetworkInference.jl/CLR
-      logs/Cuomo/plots/NetworkInference.jl/CLR
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Cuomo/networks/NetworkInference.jl/CLR
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Cuomo/analysis/NetworkInference.jl/CLR
-  analyze_Yang_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Yang/networks/NetworkInference.jl/MI
-      results/Yang/analysis/NetworkInference.jl/MI
-      logs/Yang/plots/NetworkInference.jl/MI
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Yang/networks/NetworkInference.jl/MI
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Yang/analysis/NetworkInference.jl/MI
-  analyze_Cuomo_NetworkInferenceJl_MI:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Cuomo/networks/NetworkInference.jl/MI
-      results/Cuomo/analysis/NetworkInference.jl/MI
-      logs/Cuomo/plots/NetworkInference.jl/MI
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Cuomo/networks/NetworkInference.jl/MI
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Cuomo/analysis/NetworkInference.jl/MI
-  analyze_Yang_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Yang/networks/NetworkInference.jl/PIDC
-      results/Yang/analysis/NetworkInference.jl/PIDC
-      logs/Yang/plots/NetworkInference.jl/PIDC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Yang/networks/NetworkInference.jl/PIDC
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Yang/analysis/NetworkInference.jl/PIDC
-  analyze_Cuomo_NetworkInferenceJl_PIDC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Cuomo/networks/NetworkInference.jl/PIDC
-      results/Cuomo/analysis/NetworkInference.jl/PIDC
-      logs/Cuomo/plots/NetworkInference.jl/PIDC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Cuomo/networks/NetworkInference.jl/PIDC
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Cuomo/analysis/NetworkInference.jl/PIDC
-  analyze_Yang_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Yang/networks/NetworkInference.jl/PUC
-      results/Yang/analysis/NetworkInference.jl/PUC
-      logs/Yang/plots/NetworkInference.jl/PUC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Yang/networks/NetworkInference.jl/PUC
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Yang/analysis/NetworkInference.jl/PUC
-  analyze_Cuomo_NetworkInferenceJl_PUC:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Cuomo/networks/NetworkInference.jl/PUC
-      results/Cuomo/analysis/NetworkInference.jl/PUC
-      logs/Cuomo/plots/NetworkInference.jl/PUC
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_network_inference_jl_network.function.R png
-    deps:
-    - results/Cuomo/networks/NetworkInference.jl/PUC
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_network_inference_jl_network.function.R
-    outs:
-    - results/Cuomo/analysis/NetworkInference.jl/PUC
-  analyze_Yang_GENIE3R:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Yang/networks/GENIE3-R
-      results/Yang/analysis/GENIE3-R
-      logs/Yang/plots/GENIE3-R
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_genie3r_network.function.R png
-    deps:
-    - results/Yang/networks/GENIE3-R
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_genie3r_network.function.R
-    outs:
-    - results/Yang/analysis/GENIE3-R
-  analyze_Cuomo_GENIE3R:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Cuomo/networks/GENIE3-R
-      results/Cuomo/analysis/GENIE3-R
-      logs/Cuomo/plots/GENIE3-R
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_genie3r_network.function.R png
-    deps:
-    - results/Cuomo/networks/GENIE3-R
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_genie3r_network.function.R
-    outs:
-    - results/Cuomo/analysis/GENIE3-R
-  analyze_Yang_LEAP:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Yang/networks/LEAP
-      results/Yang/analysis/LEAP
-      logs/Yang/plots/LEAP
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_leap_network.function.R png
-    deps:
-    - results/Yang/networks/LEAP
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_leap_network.function.R
-    outs:
-    - results/Yang/analysis/LEAP
-  analyze_Yang_GRNBoost2:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Yang/networks/GRNBoost2
-      results/Yang/analysis/GRNBoost2
-      logs/Yang/plots/GRNBoost2
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_grnboost2_network.function.R png
-    deps:
-    - results/Yang/networks/GRNBoost2
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_grnboost2_network.function.R
-    outs:
-    - results/Yang/analysis/GRNBoost2
-  analyze_Cuomo_GRNBoost2:
-    cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
-      results/Cuomo/networks/GRNBoost2
-      results/Cuomo/analysis/GRNBoost2
-      logs/Cuomo/plots/GRNBoost2
-      Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/load_grnboost2_network.function.R png
-    deps:
-    - results/Cuomo/networks/GRNBoost2
-    - results/tooling/R-multitool.specification
-    - src/analysis/analyze_foreach_slice.sh
-    - src/analysis/analyze_for_network_variants.R
-    - src/analysis/data_variants.csv
-    - src/analysis/load_grnboost2_network.function.R
-    outs:
-    - results/Cuomo/analysis/GRNBoost2
-  noisyR_paper_materials:
-    cmd:
-      singularity exec toolbox/bin/utilities.sif
-      tar czvf noisyR-paper-materials-$(singularity exec toolbox/bin/utilities.sif git describe --always --dirty --tags).tar.gz
-      results/Yang/analysis/GENIE3-R
-      results/Yang/analysis/NetworkInference.jl/PIDC
-      results/Yang/analysis/LEAP
-      results/Yang/networks/GENIE3-R
-      results/Yang/networks/NetworkInference.jl/PIDC
-      results/Yang/networks/LEAP
-      results/Cuomo/analysis/GENIE3-R
-      results/Cuomo/analysis/NetworkInference.jl/PIDC
-      results/Cuomo/networks/GENIE3-R
-      results/Cuomo/networks/NetworkInference.jl/PIDC
-    deps:
-    - results/Yang/analysis/GENIE3-R
-    - results/Yang/analysis/NetworkInference.jl/PIDC
-    - results/Yang/analysis/LEAP
-    - results/Yang/networks/GENIE3-R
-    - results/Yang/networks/NetworkInference.jl/PIDC
-    - results/Yang/networks/LEAP
-    - results/Cuomo/analysis/GENIE3-R
-    - results/Cuomo/analysis/NetworkInference.jl/PIDC
-    - results/Cuomo/networks/GENIE3-R
-    - results/Cuomo/networks/NetworkInference.jl/PIDC
+    - results/sliced/Cuomo
+
+  infer:
+    foreach:
+      Yang/NetworkInference.jl/CLR:   { data: Yang,  tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl CLR" }
+      Yang/NetworkInference.jl/MI:    { data: Yang,  tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl MI" }
+      Yang/NetworkInference.jl/PIDC:  { data: Yang,  tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl PIDC" }
+      Yang/NetworkInference.jl/PUC:   { data: Yang,  tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl PUC" }
+      Yang/GENIE3-R:                  { data: Yang,  tool: R-multitool,         src: GENIE3-R,            cmd: "Rscript src/inference/GENIE3-R/infer_network.R" }
+      Yang/LEAP:                      { data: Yang,  tool: R-multitool,         src: LEAP,                cmd: "Rscript src/inference/LEAP/infer_network.R" }
+      Yang/GRNBoost2:                 { data: Yang,  tool: arboreto,            src: GRNBoost2,           cmd: "python src/inference/GRNBoost2/infer_network.py" }
+      Cuomo/NetworkInference.jl/CLR:  { data: Cuomo, tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl CLR" }
+      Cuomo/NetworkInference.jl/MI:   { data: Cuomo, tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl MI" }
+      Cuomo/NetworkInference.jl/PIDC: { data: Cuomo, tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl PIDC" }
+      Cuomo/NetworkInference.jl/PUC:  { data: Cuomo, tool: NetworkInference.jl, src: NetworkInference.jl, cmd: "julia src/inference/NetworkInference.jl/infer_network.jl PUC" }
+      Cuomo/GENIE3-R:                 { data: Cuomo, tool: R-multitool,         src: GENIE3-R,            cmd: "Rscript src/inference/GENIE3-R/infer_network.R" }
+      Cuomo/GRNBoost2:                { data: Cuomo, tool: arboreto,            src: GRNBoost2,           cmd: "python src/inference/GRNBoost2/infer_network.py" }
+    do:
+      cmd: singularity exec toolbox/bin/${item.tool}.sif sh src/inference/infer_foreach_slice.sh
+        results/sliced/${item.data}
+        results/networks/${key}
+        logs/networks/${key}
+        ${item.cmd}
+      deps:
+      - results/sliced/${item.data}
+      - results/tooling/${item.tool}.specification
+      - src/inference/infer_foreach_slice.sh
+      - src/inference/${item.src}
+      outs:
+      - results/networks/${key}
+
+  analyze:
+    foreach:
+      Yang/NetworkInference.jl/CLR:   { loader: load_network_inference_jl_network.function.R }
+      Yang/NetworkInference.jl/MI:    { loader: load_network_inference_jl_network.function.R }
+      Yang/NetworkInference.jl/PIDC:  { loader: load_network_inference_jl_network.function.R }
+      Yang/NetworkInference.jl/PUC:   { loader: load_network_inference_jl_network.function.R }
+      Yang/GENIE3-R:                  { loader: load_genie3r_network.function.R }
+      Yang/LEAP:                      { loader: load_leap_network.function.R }
+      Yang/GRNBoost2:                 { loader: load_grnboost2_network.function.R }
+      Cuomo/NetworkInference.jl/CLR:  { loader: load_network_inference_jl_network.function.R }
+      Cuomo/NetworkInference.jl/MI:   { loader: load_network_inference_jl_network.function.R }
+      Cuomo/NetworkInference.jl/PIDC: { loader: load_network_inference_jl_network.function.R }
+      Cuomo/NetworkInference.jl/PUC:  { loader: load_network_inference_jl_network.function.R }
+      Cuomo/GENIE3-R:                 { loader: load_genie3r_network.function.R }
+      Cuomo/GRNBoost2:                { loader: load_grnboost2_network.function.R }
+    do:
+      cmd: singularity exec toolbox/bin/R-multitool.sif sh src/analysis/analyze_foreach_slice.sh
+        results/networks/${key}
+        results/analysis/${key}
+        logs/analysis/${key}
+        Rscript src/analysis/analyze_for_network_variants.R src/analysis/data_variants.csv src/analysis/${item.loader} png
+      deps:
+      - results/networks/${key}
+      - results/tooling/R-multitool.specification
+      - src/analysis/analyze_foreach_slice.sh
+      - src/analysis/analyze_for_network_variants.R
+      - src/analysis/data_variants.csv
+      - src/analysis/${item.loader}
+      outs:
+      - results/analysis/${key}

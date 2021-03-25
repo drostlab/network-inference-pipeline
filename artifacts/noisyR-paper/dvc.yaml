@@ -1,0 +1,28 @@
+stages:
+  materials:
+    cmd:
+      cd ../.. &&
+      singularity exec toolbox/bin/utilities.sif
+      tar czvf artifacts/noisyR-paper/$(singularity exec toolbox/bin/utilities.sif git describe --always --dirty --tags)-materials.tar.gz
+      results/analysis/Yang/GENIE3-R
+      results/analysis/Yang/NetworkInference.jl/PIDC
+      results/analysis/Yang/LEAP
+      results/networks/Yang/GENIE3-R
+      results/networks/Yang/NetworkInference.jl/PIDC
+      results/networks/Yang/LEAP
+      results/analysis/Cuomo/GENIE3-R
+      results/analysis/Cuomo/NetworkInference.jl/PIDC
+      results/networks/Cuomo/GENIE3-R
+      results/networks/Cuomo/NetworkInference.jl/PIDC
+    deps:
+    - ../../results/analysis/Yang/GENIE3-R
+    - ../../results/analysis/Yang/NetworkInference.jl/PIDC
+    - ../../results/analysis/Yang/LEAP
+    - ../../results/networks/Yang/GENIE3-R
+    - ../../results/networks/Yang/NetworkInference.jl/PIDC
+    - ../../results/networks/Yang/LEAP
+    - ../../results/analysis/Cuomo/GENIE3-R
+    - ../../results/analysis/Cuomo/NetworkInference.jl/PIDC
+    - ../../results/networks/Cuomo/GENIE3-R
+    - ../../results/networks/Cuomo/NetworkInference.jl/PIDC
+    always_changed: true

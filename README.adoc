@@ -14,6 +14,8 @@ This project uses the https://github.com/drostlab/network-inference-toolbox[Netw
 
 This project is a https://dvc.org/[DVC] pipeline that glues data preprocessing, tools from `toolbox/bin` and network evaluation together. After setup as described below, you should be able to `dvc repro` the results.
 
+NOTE: To package up materials used for the `noisyR` paper (Moutsopoulos et al.), run `dvc repro artifacts/noisyR-paper/dvc.yaml`, which will also implicitly generate its dependencies. The resulting tarball will be placed in `artifacts/noisyR-paper`.
+
 
 == Setup
 

@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  materials:
+    cmd: cd ../.. && singularity exec toolbox/bin/utilities.sif tar czvf artifacts/noisyR-paper/$(singularity
+      exec toolbox/bin/utilities.sif git describe --always --dirty --tags)-materials.tar.gz
+      results/analysis/Yang/GENIE3-R results/analysis/Yang/NetworkInference.jl/PIDC
+      results/analysis/Yang/LEAP results/networks/Yang/GENIE3-R results/networks/Yang/NetworkInference.jl/PIDC
+      results/networks/Yang/LEAP results/analysis/Cuomo/GENIE3-R results/analysis/Cuomo/NetworkInference.jl/PIDC
+      results/networks/Cuomo/GENIE3-R results/networks/Cuomo/NetworkInference.jl/PIDC
+    deps:
+    - path: ../../results/analysis/Cuomo/GENIE3-R
+      md5: 8bf9c85d8ba2d4e6e0c9e652235e5c4c.dir
+      size: 72338792
+      nfiles: 54
+    - path: ../../results/analysis/Cuomo/NetworkInference.jl/PIDC
+      md5: aa3d6905723c6e2b8861b8c082f0b1db.dir
+      size: 87937897
+      nfiles: 54
+    - path: ../../results/analysis/Yang/GENIE3-R
+      md5: 2dc32e6f3ff949c4e5c4bb47fc179810.dir
+      size: 337529568
+      nfiles: 90
+    - path: ../../results/analysis/Yang/LEAP
+      md5: 6cdd3ccd32d05b1c99ce2edd6eec0413.dir
+      size: 436690362
+      nfiles: 90
+    - path: ../../results/analysis/Yang/NetworkInference.jl/PIDC
+      md5: 07ea106f5ee8e22191fc98d54a06ee8a.dir
+      size: 251287096
+      nfiles: 90
+    - path: ../../results/networks/Cuomo/GENIE3-R
+      md5: 8d908f6cf394ec7af992da852d513900.dir
+      size: 6476941
+      nfiles: 12
+    - path: ../../results/networks/Cuomo/NetworkInference.jl/PIDC
+      md5: 7746f4fda2743506dbb8af6ffa219e01.dir
+      size: 16525714
+      nfiles: 12
+    - path: ../../results/networks/Yang/GENIE3-R
+      md5: 1e47b1604b504673eaaa9d21ec85aa81.dir
+      size: 100126670
+      nfiles: 20
+    - path: ../../results/networks/Yang/LEAP
+      md5: f17c59bda253967ccbad2c91984ace5b.dir
+      size: 292984859
+      nfiles: 20
+    - path: ../../results/networks/Yang/NetworkInference.jl/PIDC
+      md5: 895ced4cc37af3555676b01d14e44ad6.dir
+      size: 237285580
+      nfiles: 20
