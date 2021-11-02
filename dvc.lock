@@ -23,7 +23,7 @@ stages:
     - singularity exec toolbox/bin/utilities.sif wget -O results/raw-inputs.zip https://ndownloader.figshare.com/files/26052149
     deps:
     - path: https://ndownloader.figshare.com/files/26052149
-      etag: '"9ec0859fba86ca208118b92ebea977b2"'
+      checksum: '"9ec0859fba86ca208118b92ebea977b2"'
       size: 51926003
     - path: results/tooling/utilities.specification
       md5: b478b6629042ca3693e49bf237d67f5d
